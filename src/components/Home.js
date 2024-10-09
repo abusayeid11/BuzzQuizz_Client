@@ -12,17 +12,14 @@ export default function Home() {
     const { userName, userRole, isLoggedIn } = useSelector(
         (state) => state.user
     );
-    // const state = useSelector((state) => state);
 
     useEffect(() => {
         const verifyUser = async () => {
-            // Check if the user is logged in
             const token = localStorage.getItem('token');
             const id = localStorage.getItem('userId');
 
             if (token && id) {
                 try {
-                    // Make a request to the /verify endpoint to get the user data
                     const response = await axios.get(
                         `http://localhost:8000/api/user/${id}`,
                         {
@@ -54,11 +51,8 @@ export default function Home() {
     }, [dispatch]);
 
     function handleLogout() {
-        // Remove the token from localStorage
         localStorage.removeItem('token');
         localStorage.removeItem('userId');
-
-        console.log('loggedout');
         dispatch(clearUser());
         navigate('/');
     }
@@ -72,47 +66,66 @@ export default function Home() {
     function handleCourse() {
         navigate('/course');
     }
+
     return (
-        <div className="home_body">
-            <div className="header_body">
-                <div className="app_title"> BuzzQuizz</div>
+        <div className="home_body min-h-screen bg-gray-100 flex flex-col items-center justify-center">
+            {/* Header */}
+            <div className="header_body w-full max-w-5xl mx-auto px-6 py-4 flex items-center justify-between bg-white shadow-md">
+                <div className="app_title text-2xl font-bold text-blue-600">
+                    BuzzQuizz
+                </div>
                 {isLoggedIn ? (
-                    <div class="user-menu">
-                        <div class="user-info">
-                            {userName}
-                            <div class="dropdown-icon">
-                                <ArrowDropDownIcon></ArrowDropDownIcon>
-                            </div>
+                    <div className="user-menu relative group">
+                        {/* User Info (trigger) */}
+                        <div className="user-info flex items-center cursor-pointer">
+                            <span className="text-lg font-semibold text-blue-600 ">{userName}</span>
+                            <ArrowDropDownIcon className="ml-2" />
                         </div>
-                        <div class="dropdown-content">
-                            <span>{userRole}</span>
+                        
+                        {/* Dropdown content */}
+                        <div className="dropdown-content absolute right-0 mt-0 bg-white shadow-lg rounded-md z-20 w-48 opacity-0 group-hover:opacity-100 group-hover:translate-y-1 transition-all duration-200 ease-in-out">
+                            <span className="block px-4 py-2 text-gray-700 capitalize">{userRole}</span>
                             {userRole === 'admin' && (
                                 <button
-                                    className="course"
+                                    className="block w-full text-left px-4 py-2 hover:bg-gray-100"
                                     onClick={handleCourse}
                                 >
                                     Courses
                                 </button>
                             )}
-                            <button className="logout" onClick={handleLogout}>
+                            <button
+                                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                                onClick={handleLogout}
+                            >
                                 Logout
                             </button>
                         </div>
                     </div>
                 ) : (
                     <div>
-                        <button onClick={navigateToLogin}>Log In</button>
+                        <button
+                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                            onClick={navigateToLogin}
+                        >
+                            Log In
+                        </button>
                     </div>
                 )}
             </div>
-            <div className="body_layout">
-                <div className="title_body">
-                    Give Your Academic Exams
-                    <br /> with <br />
-                    BuzzQuizz
+
+            {/* Main Body */}
+            <div className="body_layout mt-16 text-center">
+                <div className="title_body text-4xl font-bold text-gray-800 mb-8">
+                    Give Your Academic Exams <br />
+                    with <span className="text-blue-500">BuzzQuizz</span>
                 </div>
                 <div className="exam_btn">
-                    <button onClick={navigateToQuiz}>Take Exam</button>
+                    <button
+                        className="bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-lg text-lg"
+                        onClick={navigateToQuiz}
+                    >
+                        Take Exam
+                    </button>
                 </div>
             </div>
         </div>
