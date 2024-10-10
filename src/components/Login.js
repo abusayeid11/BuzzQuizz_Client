@@ -44,44 +44,64 @@ export default function Login() {
     };
 
     return (
-        <div className="login_body ">
-            <h1>Log in</h1>
-            <form className="login_form" onSubmit={handleSubmit}>
+        <div className="login_body gap-4 "
+        style = {{backgroundImage : `url(bg.jpg)`} }>
+           
+            <form className="bg-blue-300  rounded-md flex flex-col justify-center items-center w-40% pt-10 pb-10 pr-10 pl-10 gap-5 border-4" onSubmit={handleSubmit}>
+                
+                <div className="title ">
+                <hr /> 
+                <h1 className= 'text-black font-sans font-bold  pl-2 pr-2'>  Log in  </h1>
+                <hr/> 
+                </div>
+           
                 {submitted && valid && (
                     <Navigate to={'/'} replace="true"></Navigate>
                 )}
                 {!valid && (
+                    <div className=''>
+                    <label htmlFor="userName" className="px-3 font-semibold">
+                    Username:
+                  </label>
                     <input
-                        className="form_field"
+                        className="border-2 h-10 w-80 rounded-md"
                         type="text"
-                        placeholder="Username"
+                        placeholder="   John Snow.."
                         name="userName"
                         value={values.userName}
                         onChange={handleInputChange}
                     />
+                    </div>
                 )}
                 {submitted && !values.userName && (
                     <span id="username-error">Please enter a username</span>
                 )}
 
                 {!valid && (
+                    <div>
+                      <label htmlFor="password" className="px-3 font-semibold">
+                      Password:
+                    </label>
                     <input
-                        className="form_field"
+                        className="border-2 h-10 w-80 rounded-md"
                         type="password"
-                        placeholder="Password"
+                        placeholder="    aB5%$we..."
                         name="password"
                         value={values.password}
                         onChange={handleInputChange}
-                    />
+                    /> </div>
                 )}
                 {submitted && !values.password && (
                     <span id="password-error">Please enter a password</span>
                 )}
 
                 {!valid && (
-                    <button className="form_field" type="submit">
+                    <div className='justify-center items-center'>
+                         <button className="h-12 w-20 font-semibold border rounded-md  bg-white hover:bg-blue-200 " type="submit">
                         Login
                     </button>
+                    </div>
+                   
                 )}
 
                 {/* Link to Register Component */}
