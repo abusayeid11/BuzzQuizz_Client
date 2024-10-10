@@ -9,13 +9,13 @@ import { clearUser, setUser } from '../redux/user_reducer';
 export default function Home() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-     const isLoggedIn = true;
-    const userName = "jerin"
-    const userRole = "admin";
-    // const userRole = "user";
-    // const { userName, userRole, isLoggedIn } = useSelector(
-    //     (state) => state.user
-    // );
+    //  const isLoggedIn = true;
+    // const userName = "jerin"
+    // const userRole = "admin";
+    // // const userRole = "user";
+    const { userName, userRole, isLoggedIn } = useSelector(
+        (state) => state.user
+    );
 
     useEffect(() => {
         const verifyUser = async () => {
@@ -112,9 +112,7 @@ export default function Home() {
                     </div>
                 ) : (
                     <div>
-                        <div className="app_title text-2xl font-bold text-blue-600 ">
-                    BuzzQuizz
-                </div>
+                      
                         <button
                             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                             onClick={navigateToLogin}
