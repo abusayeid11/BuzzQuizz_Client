@@ -44,7 +44,7 @@ export default function Login() {
     };
 
     return (
-        <div className="login_body">
+        <div className="login_body ">
             <h1>Log in</h1>
             <form className="login_form" onSubmit={handleSubmit}>
                 {submitted && valid && (
@@ -85,11 +85,14 @@ export default function Login() {
                 )}
 
                 {/* Link to Register Component */}
-                <div className="register-link">
-                    <p>
-                        Not registered?{' '}
+                <div className="register-link flex">
+                    <div>
+                    <p> Not registered?{' '}</p>
+                    </div>
+                    
+                    <div className='underline text-blue-600 hover:text-gray-400'>
                         <Link to="/register">Register here</Link>
-                    </p>
+                        </div>
                 </div>
             </form>
         </div>

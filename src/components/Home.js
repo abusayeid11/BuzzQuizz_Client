@@ -9,9 +9,13 @@ import { clearUser, setUser } from '../redux/user_reducer';
 export default function Home() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const { userName, userRole, isLoggedIn } = useSelector(
-        (state) => state.user
-    );
+     const isLoggedIn = true;
+    const userName = "jerin"
+    const userRole = "admin";
+    // const userRole = "user";
+    // const { userName, userRole, isLoggedIn } = useSelector(
+    //     (state) => state.user
+    // );
 
     useEffect(() => {
         const verifyUser = async () => {
@@ -68,23 +72,28 @@ export default function Home() {
     }
 
     return (
-        <div className="home_body min-h-screen bg-gray-100 flex flex-col items-center justify-center">
+        <div className="home_body h-screen  flex flex-col r justify-center items-center"
+        style={{ backgroundImage: `url(/bg.jpg)` }}>
             {/* Header */}
-            <div className="header_body w-full max-w-5xl mx-auto px-6 py-4 flex items-center justify-between bg-white shadow-md">
+           
+          
+            <div className="header_body  w-full  max-w-5xl mx-auto px-10 py-5  flex  justify-between bg-gray-200 shadow-md border-2 border-blue-600 rounded-md">
+           
                 <div className="app_title text-2xl font-bold text-blue-600">
                     BuzzQuizz
                 </div>
                 {isLoggedIn ? (
-                    <div className="user-menu relative group">
+                    <div className="user-menu relative group  justify-center items-center">
                         {/* User Info (trigger) */}
-                        <div className="user-info flex items-center cursor-pointer">
-                            <span className="text-lg font-semibold text-blue-600 ">{userName}</span>
+                        <div className="user-info flex items-center cursor-pointer gap-2">
+                        <span className=" text-blue-600 font-bold text-lg capitalize  font-sans ">{userName}</span>
+                            <span className=" text-gray-400 text-lg  font-sans ">({userRole})</span>
                             <ArrowDropDownIcon className="ml-2" />
                         </div>
                         
                         {/* Dropdown content */}
                         <div className="dropdown-content absolute right-0 mt-0 bg-white shadow-lg rounded-md z-20 w-48 opacity-0 group-hover:opacity-100 group-hover:translate-y-1 transition-all duration-200 ease-in-out">
-                            <span className="block px-4 py-2 text-gray-700 capitalize">{userRole}</span>
+                           
                             {userRole === 'admin' && (
                                 <button
                                     className="block w-full text-left px-4 py-2 hover:bg-gray-100"
@@ -103,6 +112,9 @@ export default function Home() {
                     </div>
                 ) : (
                     <div>
+                        <div className="app_title text-2xl font-bold text-blue-600 ">
+                    BuzzQuizz
+                </div>
                         <button
                             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                             onClick={navigateToLogin}
@@ -117,7 +129,7 @@ export default function Home() {
             <div className="body_layout mt-16 text-center">
                 <div className="title_body text-4xl font-bold text-gray-800 mb-8">
                     Give Your Academic Exams <br />
-                    with <span className="text-blue-500">BuzzQuizz</span>
+                    with <span className="text-blue-950  font-extralight underline  hover:text-gray-500">BuzzQuizz!</span>
                 </div>
                 <div className="exam_btn">
                     <button
@@ -128,6 +140,7 @@ export default function Home() {
                     </button>
                 </div>
             </div>
-        </div>
+            </div>
+    
     );
 }
