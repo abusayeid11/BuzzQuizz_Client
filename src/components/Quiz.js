@@ -43,6 +43,7 @@ export default function Quiz() {
     return (
         <div className="quiz_body">
             <h1 className="course_title">{state.questions.courseName}</h1>
+            
             <Mcq onChecked={onChecked} />
 
             <div className="grid">

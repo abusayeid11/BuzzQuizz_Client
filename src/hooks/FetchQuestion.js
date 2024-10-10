@@ -32,8 +32,9 @@ export const useFetchQuizData = () => {
 
                 const questions = questionsResponse.data;
                 const answers = correctOptionsResponse.data;
-
-                if (questions.length > 0 && answers.length > 0) {
+               
+                // && answers.length > 0
+                if (questions.length > 0) {
                     setGetData((prev) => ({ ...prev, isLoading: false }));
                     setGetData((prev) => ({
                         ...prev,
