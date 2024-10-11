@@ -35,39 +35,63 @@ const QuestionCreator = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+    
         try {
             // Create the question in the database
-            const response = await axios.post(
-                'http://localhost:8000/api/question/',
-                {
-                    QuestionText: question,
-                    QuestionType: questionType,
-                    QuizID: quizId,
-                }
-            );
+            const response = await axios.post('http://localhost:8000/api/question/', {
+                QuestionText: question,
+                QuestionType: questionType,
+                QuizID: quizId,
+            });
+    
             const { questionId } = response.data;
-
-            // Create the options for the question
-            const optionPromises = options.map((optionText) => {
-                const isCorrect = optionText === correctOption;
-                return axios.post('http://localhost:8000/api/options/', {
-                    OptionText: optionText,
-                    IsCorrect: isCorrect,
+    
+            // Handle different question types
+            if (questionType === 'multiple-choice') {
+                // Create the options for the MCQ question
+                const optionPromises = options.map((optionText) => {
+                    const isCorrect = optionText === correctOption;
+                    return axios.post('http://localhost:8000/api/options/', {
+                        OptionText: optionText,
+                        IsCorrect: isCorrect,
+                        QuestionID: questionId,
+                    });
+                });
+    
+                await Promise.all(optionPromises);
+    
+            } else if (questionType === 'true/false') {
+                // Create options for true/false question
+                await axios.post('http://localhost:8000/api/options/', {
+                    OptionText: 'True',
+                    IsCorrect: correctOption === 'True',
                     QuestionID: questionId,
                 });
-            });
-
-            await Promise.all(optionPromises);
-
-            // Reset the form fields
+                await axios.post('http://localhost:8000/api/options/', {
+                    OptionText: 'False',
+                    IsCorrect: correctOption === 'False',
+                    QuestionID: questionId,
+                });
+    
+            } else if (questionType === 'short answer') {
+                // For short answer, only store the correct answer, not multiple options
+                await axios.post('http://localhost:8000/api/options/', {
+                    OptionText: correctOption, // Correct answer
+                    IsCorrect: true,           // Always true for short answer
+                    QuestionID: questionId,
+                });
+            }
+    
+            // Reset the form fields after successful submission
             setQuestion('');
             setOptions(['', '', '', '']);
             setCorrectOption('');
+    
         } catch (error) {
             console.error('Error creating question:', error);
         }
     };
+    
     const handleFinish = () => {
         dispatch(resetOther());
         navigate('/');
@@ -85,6 +109,7 @@ const QuestionCreator = () => {
                             onChange={handleQuestionChange}
                         />
                         {options.map((option, index) => (
+                            index < 2 &&
                             <div key={index}>
                                 <input
                                     type="text"
