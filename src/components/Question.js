@@ -109,7 +109,7 @@ const QuestionCreator = () => {
                             onChange={handleQuestionChange}
                         />
                         {options.map((option, index) => (
-                            index < 2 &&
+                           
                             <div key={index}>
                                 <input
                                     type="text"
@@ -190,8 +190,8 @@ const QuestionCreator = () => {
                 <option value="short answer">Short Answer Question</option>
             </select>
             {renderQuestionForm()}
-            <button onClick={handleSubmit}>Create Question</button>
-            <button onClick={handleFinish}>Finish</button>
+            <button onClick={handleSubmit} className='text-white'>Create Question</button>
+            <button onClick={handleFinish} className='text-white'>Finish</button>
         </div>
     );
 };
