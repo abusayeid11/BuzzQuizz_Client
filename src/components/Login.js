@@ -44,14 +44,14 @@ export default function Login() {
     };
 
     return (
-        <div className="login_body gap-4 "
+        <div className="login_body font-serif gap-4 "
         style = {{backgroundImage : `url(bg.jpg)`} }>
            
-            <form className="bg-blue-300  rounded-md flex flex-col justify-center items-center w-40% pt-10 pb-10 pr-10 pl-10 gap-5 border-4" onSubmit={handleSubmit}>
+            <form className="bg-blue-300  rounded-md flex flex-col justify-center items-center w-40% pt-10 pb-10 pr-10 pl-10 gap-5 border-2 border-white" onSubmit={handleSubmit}>
                 
                 <div className="title ">
                 <hr /> 
-                <h1 className= 'text-black font-sans font-bold  pl-2 pr-2'>  Log in  </h1>
+                <h1 className= 'text-black font-serif font-bold  pl-2 pr-2'>  Log in  </h1>
                 <hr/> 
                 </div>
            

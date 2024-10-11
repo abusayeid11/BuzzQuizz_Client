@@ -1,13 +1,12 @@
-:root {
-    --clr-primary: #070f2b;
-    --clr-secondary: #1b1a55;
-    --clr-accent: #ebf400;
+/* :root {
+    
+  
     --clr-gradient: linear-gradient(
         45deg,
         var(--clr-primary) 0%,
         var(--clr-secondary) 100%
     );
-}
+} */
 .course_body {
     height: 100vh;
     width: 100%;
@@ -30,7 +29,7 @@
     border-radius: 10px;
 }
 .create_course h2 {
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-family: serif;
     font-size: x-large;
     font-weight: 700;
     color: var(--clr-secondary);
@@ -57,20 +56,24 @@
     cursor: pointer;
 }
 .course_table h2 {
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-family: serif;
     font-size: x-large;
-    font-weight: 700;
-    color: var(--clr-secondary);
+    font-weight: 600;
+    color: black;
     margin-bottom: 20px;
+    background-color: #93c5fd ;
+    border: 2px solid white;
+    border-radius: 12px;
+    padding: 10px;
 }
 .course_table {
     display: flex;
     flex-direction: column;
-    background-color: whitesmoke;
+    background-color: #b5d6fc;
     align-items: center;
     margin: 20px;
-    width: 70%;
-    border: 2px solid var(--clr-accent);
+    width: 90%;
+    border: 2px solid white;
     border-radius: 10px;
     padding: 20px;
 }
@@ -87,7 +90,7 @@
 }
 
 .course_table th {
-    background-color: var(--clr-accent);
+    background-color: #93c5fd;
     color: var(--clr-primary);
 }
 .course_table button {
@@ -95,7 +98,8 @@
     margin: 0 5px;
     padding: 5px 10px;
     font-size: 14px;
-    background-color: var(--clr-accent);
+    background-color: #93c5fd;
+    
     color: var(--clr-primary);
     border: none;
     border-radius: 5px;

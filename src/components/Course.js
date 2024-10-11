@@ -64,13 +64,16 @@ export default function Course() {
     };
 
     return (
-        <div className="course_body">
-            <h1>Course Management</h1>
-            <div className="create_course">
-                <h2>Create Course :</h2>
+        <div className="h-screen w-screen flex flex-col justify-center items-center gap-4 font-serif"  style = {{backgroundImage : `url(bg.jpg)`} }>
+            <h1></h1>
+            <h1 className='font-serif text-black font-extralight border-2 border-white rounded-md bg-blue-300 pr-10 pl-10 '>Course Management</h1>
+            <div className="h-screen w-screen flex flex-col  items-center gap-4">
+            <div className=" bg-blue-300  rounded-md flex flex-row justify-center items-center w-60% pt-10 pb-10 pr-10 pl-10 gap-5 border-2 border-white">
+                
                 <input
                     type="text"
-                    placeholder="Course Name"
+                     className='border-2 h-10 w-80 rounded-md'
+                    placeholder="  Course Name"
                     value={newCourse.CourseName}
                     onChange={(e) =>
                         setNewCourse({
@@ -81,7 +84,8 @@ export default function Course() {
                 />
                 <input
                     type="text"
-                    placeholder="Teacher ID"
+                     className='border-2 h-10 w-80 rounded-md'
+                    placeholder="  Teacher ID"
                     value={newCourse.TeacherID}
                     onChange={(e) =>
                         setNewCourse({
@@ -90,14 +94,14 @@ export default function Course() {
                         })
                     }
                 />
-                <button onClick={createCourse}>Create Course</button>
+                <button onClick={createCourse} className="h-12 w-30 font-serif font-extralight  rounded-md  bg-white hover:bg-blue-200 pr-2 pl-2 "> Create Course</button>
             </div>
             <div className="course_table">
-                <h2>Courses</h2>
+                <h2 className='font-sans font-semibold'>Courses</h2>
                 <table>
                     <thead>
                         <tr>
-                            <th>Course ID</th>
+                            <th className='font-serif'>Course ID</th>
                             <th>Course Name</th>
                             <th>Teacher ID</th>
                             <th>Actions</th>
@@ -110,14 +114,14 @@ export default function Course() {
                                 <td>{course?.CourseName}</td>
                                 <td>{course?.TeacherID}</td>
                                 <td>
-                                    <button
+                                    <button className='hover:bg-green-500'
                                         onClick={() =>
                                             updateCourse(course.CourseID)
                                         }
                                     >
                                         Update
                                     </button>
-                                    <button
+                                    <button className='hover:bg-red-500'
                                         onClick={() =>
                                             deleteCourse(course.CourseID)
                                         }
@@ -129,6 +133,7 @@ export default function Course() {
                         ))}
                     </tbody>
                 </table>
+            </div>
             </div>
         </div>
     );

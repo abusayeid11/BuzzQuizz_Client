@@ -72,22 +72,22 @@ export default function Home() {
     }
 
     return (
-        <div className="home_body h-screen  flex flex-col r justify-center items-center"
+        <div className="home_body font-serif h-screen  flex flex-col r justify-center items-center"
         style={{ backgroundImage: `url(/bg.jpg)` }}>
             {/* Header */}
            
           
             <div className="header_body  w-full  max-w-5xl mx-auto px-10 py-5  flex  justify-between bg-gray-200 shadow-md border-2 border-blue-600 rounded-md">
            
-                <div className="app_title text-2xl font-bold text-blue-600">
+                <div className="app_title text-2xl font-bold text-blue-600 font-sans">
                     BuzzQuizz
                 </div>
                 {isLoggedIn ? (
                     <div className="user-menu relative group  justify-center items-center">
                         {/* User Info (trigger) */}
                         <div className="user-info flex items-center cursor-pointer gap-2">
-                        <span className=" text-blue-600 font-bold text-lg capitalize  font-sans ">{userName}</span>
-                            <span className=" text-gray-400 text-lg  font-sans ">({userRole})</span>
+                        <span className=" text-blue-600 font-bold text-lg capitalize font-serif ">{userName}</span>
+                            <span className=" text-gray-400 text-lg  font-serif ">({userRole})</span>
                             <ArrowDropDownIcon className="ml-2" />
                         </div>
                         
