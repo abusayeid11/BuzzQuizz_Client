@@ -17,6 +17,7 @@ import {
     CheckUserExist,
     CheckUserAdmin,
 } from '../helper/helper.js';
+import TeacherEnlistment from './TeacherEnlistment.js';
 const router = createBrowserRouter([
     {
         path: '/',
@@ -84,6 +85,14 @@ const router = createBrowserRouter([
             <CheckUserStudent>
                 <AllQuizzes />
             </CheckUserStudent>
+        ),
+    },
+    {
+        path: '/teacher_enlist',
+        element: (
+            <CheckUserAdmin>
+               <TeacherEnlistment></TeacherEnlistment>
+            </CheckUserAdmin>
         ),
     },
 ]);

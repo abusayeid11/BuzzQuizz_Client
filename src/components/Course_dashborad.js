@@ -66,6 +66,15 @@ const AllCourses = () => {
                                 Take Exam
                             </Link>
                         )}
+                        {userRole === 'admin' && (
+                            <Link
+                                to={`/teacher_enlist`}
+                                className="btn"
+                                onClick={() => handleCourseId(course.CourseID)}
+                            >
+                                Enlist Teacher
+                            </Link>
+                        )}
                     </div>
                 ))}
             </div>

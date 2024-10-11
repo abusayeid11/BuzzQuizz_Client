@@ -6,13 +6,32 @@ export function attempts_Number(result) {
 }
 export function earn_points(result, answers) {
     return result
-        .map((selectedOption, i) =>
-            answers[i].CorrectOptions.includes(selectedOption)
-        )
-        .filter((isCorrect) => isCorrect)
+        .map((selectedOption, i) => {
+            const correctOptions = answers[i].CorrectOptions;
+
+            // Handle true/false comparison
+            if (answers[i].QuestionType === 'true/false') {
+                return (
+                    (selectedOption === 'True' && correctOptions.includes(true)) ||
+                    (selectedOption === 'False' && correctOptions.includes(false))
+                );
+            }
+
+            // Handle short answer comparison (case insensitive and trimmed)
+            if (answers[i].QuestionType === 'short answer') {
+                return correctOptions.some(correctAnswer =>
+                    correctAnswer.trim().toLowerCase() === selectedOption.trim().toLowerCase()
+                );
+            }
+
+            // For other types (like multiple-choice)
+            return correctOptions.includes(selectedOption);
+        })
+        .filter(isCorrect => isCorrect)
         .map(() => 10)
         .reduce((prev, curr) => prev + curr, 0);
 }
+
 export function flag_result(totalpoints, earnPoints) {
     return (totalpoints * 50) / 100 < earnPoints;
 }
