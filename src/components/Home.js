@@ -130,12 +130,42 @@ export default function Home() {
                     with <span className="text-blue-950  font-extralight underline  hover:text-gray-500">BuzzQuizz!</span>
                 </div>
                 <div className="exam_btn">
-                    <button
+                    {
+                        userRole == "admin" && (
+                            <button
                         className="bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-lg text-lg"
                         onClick={navigateToQuiz}
                     >
+                        
+                        Enlist Teachers
+                    </button>
+                        )
+                        
+                    }
+                    {
+                        userRole == "teacher" && (
+                            <button
+                        className="bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-lg text-lg"
+                        onClick={navigateToQuiz}
+                    >
+                        
+                        Add Quizez!
+                    </button>
+                        )
+                        
+                    }
+                    {
+                        userRole == "student" && (
+                            <button
+                        className="bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-lg text-lg"
+                        onClick={navigateToQuiz}
+                    >
+                        
                         Take Exam
                     </button>
+                        )
+                        
+                    }
                 </div>
             </div>
             </div>

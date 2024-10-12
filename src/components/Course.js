@@ -64,7 +64,7 @@ export default function Course() {
     };
 
     return (
-        <div className="h-screen w-screen flex flex-col justify-center items-center gap-4 font-serif"  style = {{backgroundImage : `url(bg.jpg)`} }>
+        <div className=" w-screen flex flex-col justify-center items-center gap-4 font-serif"  style = {{backgroundImage : `url(bg.jpg)`} }>
             <h1></h1>
             <h1 className='font-serif text-black font-extralight border-2 border-white rounded-md bg-blue-300 pr-10 pl-10 '>Course Management</h1>
             <div className="h-screen w-screen flex flex-col  items-center gap-4">
