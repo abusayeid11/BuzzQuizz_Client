@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 //import '../styles/TeacherEnlistment.css';
-
+import { FaClipboardCheck} from 'react-icons/fa'
 export default function TeacherEnlistment() {
     const [teachers, setTeachers] = useState([]);
     const [courses, setCourses] = useState([]);
@@ -50,12 +50,18 @@ export default function TeacherEnlistment() {
     };
 
     return (
-        <div className="teacher-enlistment_body">
-            <h1 className=' text-white'>Teacher Enlistment</h1>
-            <div className="enlistment_form">
-                <h2 className=' text-white'> Assign Teacher to Course:</h2>
+        <div className="w-full h-screen flex flex-col   font-serif text-black pt-10 "
+        style = {{backgroundImage: `url(bg.jpg)` }}>
+            <div className="title flex justify-center pb-10">
+            <h1 className=' font-serif text-black border-2 border-white bg-blue-300 rounded-md font-semibold pt-4 pb-4 pr-2 pl-4'>Teacher Enlistment</h1>
+            </div>
+          
+            <div className="pl-10 ">
+                <h2 className='font-semibold border-2 border-white w-1/5 flex flex-row justify-center items-center bg-blue-300 rounded-sm pt-4 pb-4 pr-2 pl-2 gap-3'>
+                <FaClipboardCheck size={30}/>
+                Assign Teacher to Course:</h2>
                 <div>
-                    <label htmlFor="teacher-select" className=' text-white'>Select Teacher:</label>
+                    <label htmlFor="teacher-select" className=' '>Select Teacher:</label>
                     <select
                         id="teacher-select"
                         value={selectedTeacher}

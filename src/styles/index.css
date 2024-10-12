@@ -1,6 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+
 
 :root {
     --clr-primary: #070f2b;
@@ -29,6 +27,3 @@ code {
         monospace;
 }
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;

@@ -9,7 +9,9 @@ import QuestionCreator from './Question';
 import AllCourses from './Course_dashborad';
 import CreateQuizForm from './Create_Quiz.js';
 import AllQuizzes from './Quiz_dashboard.js';
+import "../styles/App.css";
 import { useSelector } from 'react-redux';
+
 
 import {
     CheckUserStudent,
