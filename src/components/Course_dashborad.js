@@ -80,9 +80,11 @@ const AllCourses = () => {
                                 Enlist Teacher
                             </Link>
                         )}
+                        
                     </div>
                 ))}
             </div>
+            
         </div>
     );
 };

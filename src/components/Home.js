@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import { clearUser, setUser } from '../redux/user_reducer';
+import { Button } from '@mui/material';
 
 export default function Home() {
     const navigate = useNavigate();
@@ -70,6 +71,9 @@ export default function Home() {
     function handleCourse() {
         navigate('/course');
     }
+    function navigateToResponse() {
+        navigate('/response')
+    }
 
     return (
         <div className="home_body font-serif h-screen  flex flex-col r justify-center items-center"
@@ -129,13 +133,24 @@ export default function Home() {
                     Give Your Academic Exams <br />
                     with <span className="text-blue-950  font-extralight underline  hover:text-gray-500">BuzzQuizz!</span>
                 </div>
-                <div className="exam_btn">
+                <div className="exam_btn m-2">
                     <button
                         className="bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-lg text-lg"
                         onClick={navigateToQuiz}
                     >
                         Take Exam
                     </button>
+                </div>
+                <div>
+                    {userRole === 'teacher' && (
+                        <button  className="bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-lg text-lg"
+                        onClick={navigateToResponse}>
+                            See Responses
+                        </button>
+                    )}
+                </div>
+                <div>
+                    
                 </div>
             </div>
             </div>

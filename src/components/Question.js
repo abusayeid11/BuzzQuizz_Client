@@ -4,12 +4,16 @@ import '../styles/Question.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { resetOther } from '../redux/other_reducer';
+
 const QuestionCreator = () => {
     const [questionType, setQuestionType] = useState('');
     const [question, setQuestion] = useState('');
     const [options, setOptions] = useState(['', '', '', '']);
     const [correctOption, setCorrectOption] = useState('');
+    const [feedback, setFeedback] = useState(null); // To display feedback
+
     const { quizId } = useSelector((state) => state.other);
+    const userId = useSelector((state) => state.user.userId); // Teacher creating questions
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -35,20 +39,17 @@ const QuestionCreator = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-    
+
         try {
-            // Create the question in the database
             const response = await axios.post('http://localhost:8000/api/question/', {
                 QuestionText: question,
                 QuestionType: questionType,
                 QuizID: quizId,
             });
-    
+
             const { questionId } = response.data;
-    
-            // Handle different question types
+
             if (questionType === 'multiple-choice') {
-                // Create the options for the MCQ question
                 const optionPromises = options.map((optionText) => {
                     const isCorrect = optionText === correctOption;
                     return axios.post('http://localhost:8000/api/options/', {
@@ -57,11 +58,9 @@ const QuestionCreator = () => {
                         QuestionID: questionId,
                     });
                 });
-    
                 await Promise.all(optionPromises);
-    
+
             } else if (questionType === 'true/false') {
-                // Create options for true/false question
                 await axios.post('http://localhost:8000/api/options/', {
                     OptionText: 'True',
                     IsCorrect: correctOption === 'True',
@@ -72,26 +71,25 @@ const QuestionCreator = () => {
                     IsCorrect: correctOption === 'False',
                     QuestionID: questionId,
                 });
-    
+
             } else if (questionType === 'short answer') {
-                // For short answer, only store the correct answer, not multiple options
-                await axios.post('http://localhost:8000/api/options/', {
-                    OptionText: correctOption, // Correct answer
-                    IsCorrect: true,           // Always true for short answer
+                await axios.post('http://localhost:8000/api/short_answer/', {
+                    CorrectAnswer: correctOption,
                     QuestionID: questionId,
                 });
             }
-    
-            // Reset the form fields after successful submission
+
+            setFeedback('Question created successfully');
             setQuestion('');
             setOptions(['', '', '', '']);
             setCorrectOption('');
-    
+
         } catch (error) {
             console.error('Error creating question:', error);
+            setFeedback('Error creating question');
         }
     };
-    
+
     const handleFinish = () => {
         dispatch(resetOther());
         navigate('/');
@@ -101,7 +99,7 @@ const QuestionCreator = () => {
         switch (questionType) {
             case 'multiple-choice':
                 return (
-                    <div className="mcq_body">
+                    <div className="mcq_body text-black">
                         <input
                             type="text"
                             placeholder="Question"
@@ -109,18 +107,12 @@ const QuestionCreator = () => {
                             onChange={handleQuestionChange}
                         />
                         {options.map((option, index) => (
-                           
                             <div key={index}>
                                 <input
                                     type="text"
                                     placeholder={`Option ${index + 1}`}
                                     value={option}
-                                    onChange={(e) =>
-                                        handleOptionChange(
-                                            index,
-                                            e.target.value
-                                        )
-                                    }
+                                    onChange={(e) => handleOptionChange(index, e.target.value)}
                                 />
                             </div>
                         ))}
@@ -139,7 +131,7 @@ const QuestionCreator = () => {
                 );
             case 'true/false':
                 return (
-                    <div className="single_question">
+                    <div className="single_question text-black">
                         <input
                             type="text"
                             placeholder="Question"
@@ -158,7 +150,7 @@ const QuestionCreator = () => {
                 );
             case 'short answer':
                 return (
-                    <div className="short_question">
+                    <div className="short_question text-black">
                         <input
                             type="text"
                             placeholder="Question"
@@ -179,19 +171,18 @@ const QuestionCreator = () => {
     };
 
     return (
-        <div className="type_body">
+        <div className="type_body text-black">
             <h1>Create Questions</h1>
             <select value={questionType} onChange={handleQuestionTypeChange}>
                 <option value="">Select Question Type</option>
-                <option value="multiple-choice">
-                    Multiple Choice Question
-                </option>
+                <option value="multiple-choice">Multiple Choice Question</option>
                 <option value="true/false">True/False Question</option>
                 <option value="short answer">Short Answer Question</option>
             </select>
             {renderQuestionForm()}
-            <button onClick={handleSubmit} className='text-white'>Create Question</button>
-            <button onClick={handleFinish} className='text-white'>Finish</button>
+            <button onClick={handleSubmit} className='text-black'>Create Question</button>
+            <button onClick={handleFinish} className='text-black'>Finish</button>
+            {feedback && <p>{feedback}</p>}
         </div>
     );
 };
