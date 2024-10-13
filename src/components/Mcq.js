@@ -89,18 +89,26 @@ export default function Mcq({ onChecked }) {
 
     const submitResponse = async (questionId, chosenOption, isCorrect) => {
         try {
+            // Fetch the AnswerText from the Option table using chosenOption (OptionID)
+            const optionResponse = await axios.get(`http://localhost:8000/api/options/${chosenOption}`);
+            const answerText = optionResponse.data.OptionText;  // Assuming 'OptionText' is the field name for answer text
+    
+            // Now submit the response with the fetched AnswerText
             const response = await axios.post('http://localhost:8000/api/response/', {
                 UserID: userId,
                 QuizID: quizId,
                 QuestionID: questionId,
                 ChosenOption: chosenOption,
+                AnswerText: answerText,  // Use the fetched answer text
                 IsCorrect: isCorrect,
             });
+    
             console.log('Response submitted successfully', response.data);
         } catch (error) {
             console.error('Error submitting response:', error);
         }
     };
+    
 
     function onSelect(optionId) {
         onChecked(optionId);
