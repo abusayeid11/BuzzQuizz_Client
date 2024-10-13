@@ -18,7 +18,6 @@ const AllQuizzes = () => {
                     `http://localhost:8000/api/quiz/course/${courseId}`
                 );
                 setQuizzes(response.data);
-
                 setLoading(false);
             } catch (error) {
                 console.error('Error fetching courses:', error);
@@ -27,10 +26,9 @@ const AllQuizzes = () => {
         };
 
         fetchQuizzes();
-    }, []);
+    }, [courseId]);
 
     const handleQuizId = (quizzId) => {
-        // Dispatch the setCourseId action with courseId as the payload
         dispatch(setQuizID(quizzId));
     };
 
