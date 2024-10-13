@@ -141,9 +141,6 @@ export default function Home() {
                         
                         Take Exam
                     </button>
-                        )
-                        
-                    }
                 </div>
                 <div>
                     {userRole === 'teacher' && (
