@@ -133,13 +133,17 @@ export default function Home() {
                     Give Your Academic Exams <br />
                     with <span className="text-blue-950  font-extralight underline  hover:text-gray-500">BuzzQuizz!</span>
                 </div>
-                <div className="exam_btn m-2">
+                <div className="exam_btn">
                     <button
                         className="bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-lg text-lg"
                         onClick={navigateToQuiz}
                     >
+                        
                         Take Exam
                     </button>
+                        )
+                        
+                    }
                 </div>
                 <div>
                     {userRole === 'teacher' && (
