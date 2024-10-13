@@ -142,14 +142,7 @@ export default function Home() {
                         Take Exam
                     </button>
                 </div>
-                <div>
-                    {userRole === 'teacher' && (
-                        <button  className="bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-lg text-lg"
-                        onClick={navigateToResponse}>
-                            See Responses
-                        </button>
-                    )}
-                </div>
+               
                 <div>
                     
                 </div>
