@@ -99,16 +99,21 @@ const QuestionCreator = () => {
         switch (questionType) {
             case 'multiple-choice':
                 return (
-                    <div className="mcq_body text-black">
+                    <div className=" text-black flex gap-2 justify-center items-center">
+                        <div>
                         <input
+                         className='border-2 rounded-lg  p-4 pr-5 shadow-sm shadow-black '
                             type="text"
                             placeholder="Question"
                             value={question}
                             onChange={handleQuestionChange}
                         />
+                        </div>
+                       
                         {options.map((option, index) => (
-                            <div key={index}>
+                            <div key={index} className=''>
                                 <input
+                                className='border-2 rounded-lg pt-2 pb-2 pr-2 pl-2  shadow-sm shadow-black'
                                     type="text"
                                     placeholder={`Option ${index + 1}`}
                                     value={option}
@@ -116,11 +121,11 @@ const QuestionCreator = () => {
                                 />
                             </div>
                         ))}
-                        <select
+                        <select className='border-2 border-white bg-blue-300 p-2 rounded-md'
                             value={correctOption}
                             onChange={handleCorrectOptionChange}
                         >
-                            <option value="">Select Correct Option</option>
+                            <option value="" >Select Correct Option</option>
                             {options.map((option, index) => (
                                 <option key={index} value={option}>
                                     Option {index + 1}
@@ -131,14 +136,16 @@ const QuestionCreator = () => {
                 );
             case 'true/false':
                 return (
-                    <div className="single_question text-black">
+                    <div className="flex gap-4">
                         <input
+                              className='border-2 rounded-lg  p-4 pr-5 shadow-sm shadow-black '
                             type="text"
                             placeholder="Question"
                             value={question}
                             onChange={handleQuestionChange}
                         />
                         <select
+                           className='border-2 border-white bg-blue-300 p-2 rounded-md'
                             value={correctOption}
                             onChange={handleCorrectOptionChange}
                         >
@@ -152,12 +159,14 @@ const QuestionCreator = () => {
                 return (
                     <div className="short_question text-black">
                         <input
+                             className='border-2 rounded-lg  p-4 pr-5 shadow-sm shadow-black '
                             type="text"
                             placeholder="Question"
                             value={question}
                             onChange={handleQuestionChange}
                         />
                         <input
+                             className='border-2 rounded-lg  p-4 pr-5 shadow-sm shadow-black '
                             type="text"
                             placeholder="Correct Answer"
                             value={correctOption}
@@ -171,17 +180,20 @@ const QuestionCreator = () => {
     };
 
     return (
-        <div className="type_body text-black">
-            <h1>Create Questions</h1>
-            <select value={questionType} onChange={handleQuestionTypeChange}>
+        <div className="w-full h-screen flex  flex-col justify-center items-center font-serif gap-5"
+        style={{backgroundImage:`url(bg.jpg)`}}
+        >
+            <h1 className='bg-blue-300 border-2 border-white w-1/6 font-serif text-2xl text-black flex justify-center rounded-md pl-2 pr-2'>Create Questions</h1>
+            <select value={questionType} onChange={handleQuestionTypeChange} 
+            className='border-2 border-white   bg-blue-300 p-4 rounded-lg'>
                 <option value="">Select Question Type</option>
                 <option value="multiple-choice">Multiple Choice Question</option>
                 <option value="true/false">True/False Question</option>
                 <option value="short answer">Short Answer Question</option>
             </select>
             {renderQuestionForm()}
-            <button onClick={handleSubmit} className='text-black'>Create Question</button>
-            <button onClick={handleFinish} className='text-black'>Finish</button>
+            <button onClick={handleSubmit} className=' border-2 border-blue-300 bg-white hover:bg-blue-500 pt-2 pr-2 pl-2 pb-2 rounded-md hover:p-3'>Create Question</button>
+            <button onClick={handleFinish} className=' border-2 border-blue-300 bg-white hover:bg-blue-500 pt-2 pr-2 pl-2 pb-2 rounded-md hover:p-3'>Finish</button>
             {feedback && <p>{feedback}</p>}
         </div>
     );
