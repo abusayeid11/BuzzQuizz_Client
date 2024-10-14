@@ -1,7 +1,7 @@
 import Mcq from './Mcq';
 import '../styles/Quiz.css';
 /** redux store import */
-
+import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 /**import functions from hooks */
@@ -41,21 +41,24 @@ export default function Quiz() {
         return <Navigate to={'/result'} replace="true"></Navigate>;
     }
     return (
-        <div className="quiz_body">
-            <h1 className="course_title">{state.questions.courseName}</h1>
-            
+        <div className="w-full h-screen flex flex-col justify-center items-center pl-4 font-serif"
+        style = {{backgroundImage:`url(bg.jpg)`}}
+        >
+            <h1 className="text-black ">{state.questions.courseName}</h1>
+             
             <Mcq onChecked={onChecked} />
 
-            <div className="grid">
+            <div className="pt-2 flex gap-80">
                 <button
-                    className="btn prev"
+                    className=" bg-blue-400 pt-2 pb-2 pr-16 pl-16 border-2 border-white rounded-md hover:bg-white "
                     onClick={onPrev}
                     disabled={trace <= 0 ? true : false}
                 >
-                    Prev
+                  <FaArrowLeft size={25}/> 
                 </button>
-                <button className="btn next" onClick={onNext}>
-                    Next
+                
+                <button  className=" bg-blue-400 pt-2 pb-2 pr-16 pl-16 border-2 border-white rounded-md hover:bg-white" onClick={onNext}>
+                <FaArrowRight size={25}/> 
                 </button>
             </div>
         </div>

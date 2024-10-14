@@ -1,73 +1,10 @@
-// import React, { useEffect, useState } from 'react';
-// import '../styles/Mcq.css';
-// import { useFetchQuizData } from '../hooks/FetchQuestion';
-// import { useDispatch, useSelector } from 'react-redux';
-// import { updateResult } from '../hooks/setResult';
-
-// export default function Mcq({ onChecked }) {
-//     const [checked, setChecked] = useState(undefined);
-//     const [{ isLoading, serverError }] = useFetchQuizData();
-
-//     const trace = useSelector((state) => state.questions.trace);
-//     const result = useSelector((state) => state.result.result);
-//     const dispatch = useDispatch();
-//     const questions = useSelector(
-//         (state) => state.questions.queue[state.questions.trace]
-//     );
-//     const state = useSelector((state) => state);
-
-//     useEffect(() => {
-//         console.log(state);
-//         dispatch(updateResult({ trace, checked }));
-//     }, [checked]);
-
-//     function onSelect(i) {
-//         onChecked(i);
-//         setChecked(i);
-//         dispatch(updateResult({ trace, checked }));
-//     }
-//     if (isLoading) return <h3 className="text-light">isLoading</h3>;
-//     if (serverError)
-//         return <h3 className="text-light">{serverError || 'Unknown Error'}</h3>;
-//     return (
-//         <div className="mcq_body">
-//             <h2 className="question_title">{questions?.QuestionText}</h2>
-//             <ul key={questions?.QuestionID}>
-//                 {questions?.Options.map((option, i) => (
-//                     <li key={option.OptionID}>
-//                         <input
-//                             type="radio"
-//                             value={false}
-//                             name="options"
-//                             id={`q${option.OptionID}-option`}
-//                             onChange={() => onSelect(option.OptionID)}
-//                         />
-//                         <label
-//                             className="radio_lable"
-//                             htmlFor={`q${option.OptionID}-option`}
-//                         >
-//                             {option.OptionText}
-//                         </label>
-//                         <div
-//                             className={`check ${
-//                                 result[trace] === option.OptionID
-//                                     ? 'checked'
-//                                     : ''
-//                             }`}
-//                         ></div>
-//                     </li>
-//                 ))}
-//             </ul>
-//         </div>
-//     );
-// }
-
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';  // Import axios for API requests
 import '../styles/Mcq.css';
 import { useFetchQuizData } from '../hooks/FetchQuestion';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateResult } from '../hooks/setResult';
+import { FaQuestion } from 'react-icons/fa';
 
 export default function Mcq({ onChecked }) {
     const [checked, setChecked] = useState(undefined);
@@ -78,13 +15,13 @@ export default function Mcq({ onChecked }) {
     const questions = useSelector(
         (state) => state.questions.queue[state.questions.trace]
     );
-    const state = useSelector((state) => state);
     const userId = useSelector((state) => state.user.userId); // Get the user ID from the store
     const quizId = useSelector((state) => state.other.quizId); // Get the quiz ID from the store
 
     useEffect(() => {
-        console.log(state);
-        dispatch(updateResult({ trace, checked }));
+        if (checked !== undefined) {
+            dispatch(updateResult({ trace, checked }));
+        }
     }, [checked, dispatch, trace]);
 
     const submitResponse = async (questionId, chosenOption, isCorrect) => {
@@ -92,9 +29,9 @@ export default function Mcq({ onChecked }) {
             // Fetch the AnswerText from the Option table using chosenOption (OptionID)
             const optionResponse = await axios.get(`http://localhost:8000/api/options/${chosenOption}`);
             const answerText = optionResponse.data.OptionText;  // Assuming 'OptionText' is the field name for answer text
-    
+
             // Now submit the response with the fetched AnswerText
-            const response = await axios.post('http://localhost:8000/api/response/', {
+            await axios.post('http://localhost:8000/api/response/', {
                 UserID: userId,
                 QuizID: quizId,
                 QuestionID: questionId,
@@ -102,59 +39,71 @@ export default function Mcq({ onChecked }) {
                 AnswerText: answerText,  // Use the fetched answer text
                 IsCorrect: isCorrect,
             });
-    
-            console.log('Response submitted successfully', response.data);
+
+            console.log('Response submitted successfully');
         } catch (error) {
-            console.error('Error submitting response:', error);
+            console.error('Error submitting response:', error.message || error);
         }
     };
-    
 
-    function onSelect(optionId) {
+    const onSelect = (optionId) => {
         onChecked(optionId);
         setChecked(optionId);
 
-        const isCorrect = questions.Options.find(option => option.OptionID === optionId)?.IsCorrect;
+        const isCorrect = questions?.Options.find(option => option.OptionID === optionId)?.IsCorrect;
 
         // Submit response to the backend
-        submitResponse(questions.QuestionID, optionId, isCorrect);
-
-        // Dispatch the result to update the state
-        dispatch(updateResult({ trace, checked: optionId }));
-    }
+        if (questions) {
+            submitResponse(questions.QuestionID, optionId, isCorrect);
+        }
+    };
 
     if (isLoading) return <h3 className="text-light">Loading...</h3>;
-    if (serverError) return <h3 className="text-light">{serverError || 'Unknown Error'}</h3>;
+    if (serverError) {
+        console.error(serverError);
+        return <h3 className="text-light">{serverError.message || 'Unknown Error'}</h3>;
+    }
 
     return (
-        <div className="mcq_body">
-            <h2 className="question_title">{questions?.QuestionText}</h2>
+        <div className="w-50% h-50% bg-blue-300 border-2 border-white rounded-md pt-4  pl-4  ">
+            <div className="qs flex gap-2">
+                <FaQuestion size={30} />
+                <h2 className="text-3xl underline flex items-center">
+                    {questions?.QuestionText}
+                </h2> 
+            </div>
+            <div>
             <ul key={questions?.QuestionID}>
                 {questions?.Options.map((option) => (
-                    <li key={option.OptionID}>
+                    <li key={option.OptionID} className="flex ">
+                        {/* Hidden radio input */}
                         <input
                             type="radio"
-                            value={false}
                             name="options"
                             id={`q${option.OptionID}-option`}
                             onChange={() => onSelect(option.OptionID)}
+                            className="hidden"
                         />
+
+                        {/* Custom radio button */}
                         <label
-                            className="radio_label"
+                            className="text-black font-serif cursor-pointer flex flex-row gap-2 w-full"
                             htmlFor={`q${option.OptionID}-option`}
                         >
+                            <span
+                                className={`w-5 h-5  rounded-full border-2 transition duration-20  ${
+                                    checked === option.OptionID ? 'bg-black border-2 border-black' : 'bg-white border-gray-400'
+                                }`}
+                            ></span>
+                            <span className='text-black font-serif hover:text-gray-50'>
                             {option.OptionText}
+                            </span>
+                           
                         </label>
-                        <div
-                            className={`check ${
-                                result[trace] === option.OptionID
-                                    ? 'checked'
-                                    : ''
-                            }`}
-                        ></div>
                     </li>
                 ))}
             </ul>
+            </div>
         </div>
     );
 }

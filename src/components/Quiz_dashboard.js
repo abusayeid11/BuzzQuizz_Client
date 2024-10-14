@@ -100,9 +100,14 @@ const AllQuizzes = () => {
     }
 
     return (
-        <div className="courses-container">
-            <h2>All Quizzes</h2>
-            <div className="grid-container">
+        <div className="w-full h-screen font-serif"   style = {{backgroundImage:`url(bg.jpg)`}}>
+            <div className="quiz flex justify-center pt-4 pb-4">
+            <h2 className='flex justify-center  bg-blue-300 w-1/6 border-2 border-white rounded-md pt-2 pb-2 text-2xl'>All Quizzes</h2>
+            </div>
+           
+            <div className="
+             grid grid-cols-5 gap-4 w-full
+            ">
                 {quizzes?.map((quiz) => (
                     <div key={quiz?.QuizID} className="course-card">
                         <h3>{quiz?.QuizTitle}</h3>
