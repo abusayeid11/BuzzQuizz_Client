@@ -115,7 +115,7 @@ const AllQuizzes = () => {
                         {user?.userRole !== 'teacher' && (
                         <Link
                             to={`/quiz`}
-                            className="btn"
+                            className="btn bg-blue-700 hover:bg-blue-500 hover:p-2 text-center p-2 rounded text-white font-extralight"
                             onClick={() => handleQuizId(quiz.QuizID)}
                         >
                             Take Exam
@@ -125,7 +125,7 @@ const AllQuizzes = () => {
                         {user?.userRole === 'teacher' && (
                             <Link
                                 to={`/response`}
-                                className="btn"
+                                className="btn bg-blue-700 hover:bg-blue-500 hover:p-2 text-center p-2 rounded text-white font-extralight"
                                 onClick={() => handleQuizId(quiz.QuizID)}
                             >
                                 View Responses

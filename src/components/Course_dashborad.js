@@ -152,14 +152,14 @@ const AllCourses = () => {
                             <>
                                 <Link
                                     to={'/create_quiz'}
-                                    className="btn bg-yellow-300 hover:bg-yellow-400 text-center p-2 rounded"
+                                    className="btn bg-blue-700 hover:bg-blue-500 font-extralight text-center p-2 rounded text-white"
                                     onClick={() => handleCourseId(course.CourseID)}
                                 >
                                     Create Exam
                                 </Link>
                                 <Link
                                     to={'/quiz_view'}
-                                    className="btn bg-blue-300 hover:bg-blue-400 text-center p-2 rounded"
+                                    className="btn bg-blue-700 hover:bg-blue-500 hover:p-2 text-center p-2 rounded text-white font-extralight"
                                     onClick={() => handleCourseId(course.CourseID)}
                                 >
                                     View Quiz
@@ -170,7 +170,7 @@ const AllCourses = () => {
                         {userRole === 'student' && (
                             <Link
                                 to={'/quiz_view'}
-                                className="btn bg-green-300 hover:bg-green-400 text-center p-2 rounded"
+                                className="btn bg-blue-700 hover:bg-blue-500 hover:p-2 text-center p-2 rounded text-white font-extralight"
                                 onClick={() => handleCourseId(course.CourseID)}
                             >
                                 Take Exam
@@ -180,7 +180,7 @@ const AllCourses = () => {
                         {userRole === 'admin' && (
                             <Link
                                 to={'/teacher_enlist'}
-                                className="btn bg-white hover:bg-blue-500 text-center p-2 rounded"
+                                className="btn bg-blue-700 hover:bg-blue-500 hover:p-2 text-center p-2 rounded text-white font-extralight"
                                 onClick={() => handleCourseId(course.CourseID)}
                             >
                                 Enlist Teacher

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import '../styles/Result.css';
+
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { resetAllAction } from '../redux/question_reducer';
@@ -29,41 +29,43 @@ export default function Result() {
         dispatch(resetOther());
     }
     return (
-        <div className="container">
-            <h1 className="title text-light">Quiz Application</h1>
-            <div className="result flex-center">
-                <div className="flex">
-                    <span>Username</span>
-                    <span className="bold">{userId}</span>
+        <div className="w-full h-screen font-serif flex flex-col justify-center items-center  gap-4 " 
+        style={{backgroundImage:`url(bg.jpg)`}}>
+            <h1 className="bg-blue-400 border-2 border-white pt-2 pb-2 pr-2 pl-2 rounded-md w-1/8 flex justify-center font-serif text-black text-2xl">Quiz Application</h1>
+            <div className="bg-blue-300 border-2 pt-4 pr-4 pl-4 pb-4  w-1/3  font-serif flex flex-col gap-2">
+                <div className="flex bg-blue-400 border-2 border-white rounded-md items-center pt-2 pr-2 pl-2 justify-between">
+                    <span className='font-serif text-xl text-black '>Username:</span>
+                    <span className="font-serif text-2xl text-black">{userId}</span>
                 </div>
-                <div className="flex">
-                    <span>Total Quiz Points : </span>
-                    <span className="bold">{totalpoints}</span>
+                <div className="flex bg-blue-400 border-2 border-white rounded-md items-center pt-2 pr-2 pl-2 justify-between">
+                    <span className='font-serif text-xl text-black'>Total Quiz Points:</span>
+                    <span className="font-serif text-2xl text-black">{totalpoints}</span>
                 </div>
-                <div className="flex">
-                    <span>Total Questions : </span>
-                    <span className="bold">{queue.length}</span>
+                <div className="flex bg-blue-400 border-2 border-white rounded-md items-center pt-2 pr-2 pl-2 justify-between">
+                    <span className='font-serif text-xl text-black'>Total Questions : </span>
+                    <span className="font-serif text-2xl text-black">{queue.length}</span>
                 </div>
-                <div className="flex">
-                    <span>Total Attempts : </span>
-                    <span className="bold">{attempts}</span>
+                <div className="flex bg-blue-400 border-2 border-white rounded-md items-center pt-2 pr-2 pl-2 justify-between">
+                <span className='font-serif text-xl text-black'>Total Attempts : </span>
+                    <span className="font-serif text-2xl text-black">{attempts}</span>
                 </div>
-                <div className="flex">
-                    <span>Total Earn Points : </span>
-                    <span className="bold">{earnPoints}</span>
+                <div className="flex bg-blue-400 border-2 border-white rounded-md items-center pt-2 pr-2 pl-2 justify-between ">
+                <span className='font-serif text-xl text-black'>Total Earn Points : </span>
+                
+                    <span className="font-serif text-2xl text-black ">{earnPoints}</span>
                 </div>
-                <div className="flex">
-                    <span>Quiz Result</span>
+                <div className="flex bg-blue-400 border-2 border-white rounded-md items-center pt-2 pr-2 pl-2 justify-between">
+                <span className='font-serif text-xl text-black flex '>Quiz Result: </span>
                     <span
                         style={{ color: `${flag ? '#01440d' : '#ff2a66'}` }}
-                        className="bold"
+                        className="font-serif text-2xl text-black"
                     >
                         {flag ? 'Passed' : 'Failed'}
                     </span>
                 </div>
             </div>
-            <div className="start">
-                <Link className="btn" to={'/'} onClick={onRestart}>
+            <div className="">
+                <Link className="btn bg-blue-600 hover:bg-blue-400 hover:p-4 text-white font-extralight" to={'/'} onClick={onRestart}>
                     Restart
                 </Link>
             </div>
