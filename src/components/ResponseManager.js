@@ -40,11 +40,19 @@ const ResponseManager = () => {
     if (error) return <h3 className="text-center text-red-500">Error: {error}</h3>;
 
     return (
+<<<<<<< HEAD
         <div className="bg-white p-6 rounded-lg shadow-lg">
             <h2 className="text-2xl font-bold text-gray-800 mb-4">User Responses</h2>
+=======
+        <div className='w-full  flex  flex-col justify-center items-center font-serif gap-2 pt-2' style={
+            {backgroundImage:`url(bg.jpg)`}
+        }>
+            <h1 className='bg-blue-300 border-2 border-white w-1/6 font-serif text-2xl text-black flex justify-center rounded-md pl-2 pr-2'>User Responses</h1>
+>>>>>>> e0b2abd79bd868a9ea6fec0d373c2c90635952e2
             {responses.length === 0 ? (
                 <p className="text-gray-600">No responses found.</p>
             ) : (
+<<<<<<< HEAD
                 <div className="overflow-x-auto">
                     <table className="w-full border-collapse bg-white">
                         <thead>
@@ -55,6 +63,30 @@ const ResponseManager = () => {
                                 <th className="py-3 px-4 text-left">Answer Text</th>
                                 <th className="py-3 px-4 text-left">Is Correct</th>
                                 <th className="py-3 px-4 text-left">Actions</th>
+=======
+                <table className='w-full p-2 bg-blue-400 '>
+                    <thead>
+                        <tr>
+                            <th className='border-2 p-2' >User</th>
+                            <th className='border-2 p-2'>Question</th>
+                            <th className='border-2 p-2'>Chosen Option</th>
+                            <th className='border-2 p-2'>Answer Text</th>
+                            <th className='border-2 p-2'>Is Correct</th>
+                            <th className='border-2 p-2'>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody className='text-black bg-blue-300'>
+                        {responses.map(response => (
+                            <tr key={response.ResponseID}>
+                                <td className='border-2 p-1 text-center'>{response.FirstName} {response.LastName}</td>
+                                <td className='border-2  text-center'>{response.QuestionText}</td>
+                                <td className='border-2 text-center'>{response.ChosenOption}</td>
+                                <td className='border-2 text-center'>{response.AnswerText}</td>
+                                <td className='border-2 text-center'>{response.IsCorrect ? 'Yes' : 'No'}</td>
+                                <td className='rounded-sm border-2 text-center bg-blue-500 hover:bg-red-600'>
+                                    <button onClick={() => handleDelete(response.ResponseID)}>Delete</button>
+                                </td>
+>>>>>>> e0b2abd79bd868a9ea6fec0d373c2c90635952e2
                             </tr>
                         </thead>
                         <tbody>

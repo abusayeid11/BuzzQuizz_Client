@@ -117,8 +117,7 @@ export default function Home() {
                 ) : (
                     <div>
                       
-                        <button
-                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                       <button className=' border-2 border-blue-300 bg-white hover:bg-blue-500 pt-2 pr-2 pl-2 pb-2 rounded-md hover:p-3'
                             onClick={navigateToLogin}
                         >
                             Log In
@@ -134,13 +133,35 @@ export default function Home() {
                     with <span className="text-blue-950  font-extralight underline  hover:text-gray-500">BuzzQuizz!</span>
                 </div>
                 <div className="exam_btn">
-                    <button
-                        className="bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-lg text-lg"
-                        onClick={navigateToQuiz}
-                    >
-                        
-                        Take Exam
-                    </button>
+                      
+                {userRole === 'admin' && (
+                                <button
+                                className="bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-lg text-lg"
+                                onClick={navigateToQuiz}
+                            >
+                                
+                                Enlist Teacher
+                            </button>
+                            )}
+                             {userRole === 'student' && (
+                                <button
+                                className="bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-lg text-lg"
+                                onClick={navigateToQuiz}
+                            >
+                                
+                                Take Exam
+                            </button>
+                            )}
+                             {userRole === 'teacher' && (
+                                <button
+                                className="bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-lg text-lg"
+                                onClick={navigateToQuiz}
+                            >
+                                
+                                Create Quiz
+                            </button>
+                            )}
+                   
                 </div>
                
                 <div>
