@@ -66,8 +66,8 @@ const ResponseManager = () => {
                             >
                                 {student.FirstName} {student.LastName}
                             </button>
-                            <span className="text-white ml-4">
-                                Total Score: {calculateTotalScore(student.UserID)}
+                            <span className="text-blue-600 ml-4 space-x-1 text-xl">
+                                Score: {calculateTotalScore(student.UserID)}
                             </span>
 
                             {selectedStudent === student.UserID && (
