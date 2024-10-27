@@ -6,6 +6,7 @@ const ResponseManager = () => {
     const [responses, setResponses] = useState([]);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [selectedStudent, setSelectedStudent] = useState(null); // Track selected student
     const { quizId } = useSelector((state) => state.other);
 
     useEffect(() => {
@@ -13,7 +14,6 @@ const ResponseManager = () => {
             try {
                 const res = await axios.get(`http://localhost:8000/api/response/quiz/${quizId}`);
                 setResponses(Array.isArray(res.data) ? res.data : []);
-                
             } catch (err) {
                 setError(err.message);
             } finally {
@@ -35,59 +35,87 @@ const ResponseManager = () => {
         }
     };
 
+    const handleStudentSelect = (studentId) => {
+        setSelectedStudent(studentId === selectedStudent ? null : studentId);
+    };
+
+    const calculateTotalScore = (studentId) => {
+        const studentResponses = responses.filter(response => response.UserID === studentId);
+        return studentResponses.filter(response => response.IsCorrect).length * 10;
+    };
+
     if (loading) return <h3 className="text-center text-gray-500">Loading...</h3>;
     if (error) return <h3 className="text-center text-red-500">Error: {error}</h3>;
 
+    const uniqueStudents = [...new Map(responses.map(item => [item.UserID, item])).values()];
+
     return (
-        <div
-            className='w-full flex flex-col justify-center items-center font-serif gap-2 pt-2'
-            style={{ backgroundImage: `url(bg.jpg)` }}
-        >
-            <h1 className='bg-blue-300 border-2 border-white w-1/6 font-serif text-2xl text-black flex justify-center rounded-md pl-2 pr-2'>
+        <div className="w-full flex flex-col justify-center items-center font-serif gap-2 pt-2 bg-blue-300 h-screen">
+            <h1 className="bg-blue-300 border-2 border-white w-1/6 font-serif text-2xl text-black flex justify-center rounded-md pl-2 pr-2">
                 User Responses
             </h1>
-            {responses.length === 0 ? (
+            {uniqueStudents.length === 0 ? (
                 <p className="text-gray-600">No responses found.</p>
             ) : (
-                <table className='w-full p-2 bg-blue-400'>
-                    <thead>
-                        <tr>
-                            <th className='border-2 p-2'>User</th>
-                            <th className='border-2 p-2'>Question</th>
-                            <th className='border-2 p-2'>Chosen Option</th>
-                            <th className='border-2 p-2'>Answer Text</th>
-                            <th className='border-2 p-2'>Is Correct</th>
-                            <th className='border-2 p-2'>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody className='text-black bg-blue-300'>
-                        {responses.map(response => (
-                            <tr key={response.ResponseID}>
-                                <td className='border-2 p-1 text-center'>{response.FirstName} {response.LastName}</td>
-                                <td className='border-2 text-center'>{response.QuestionText}</td>
-                                <td className='border-2 text-center'>{response.ChosenOption}</td>
-                                <td className='border-2 text-center'>{response.AnswerText}</td>
-                                <td className='border-2 text-center'>
-                                    <span
-                                        className={`py-1 px-3 rounded-full text-sm ${
-                                            response.IsCorrect ? 'bg-green-200 text-green-700' : 'bg-red-200 text-red-700'
-                                        }`}
-                                    >
-                                        {response.IsCorrect ? 'Yes' : 'No'}
-                                    </span>
-                                </td>
-                                <td className='rounded-sm border-2 text-center bg-blue-500 hover:bg-red-600'>
-                                    <button
-                                        onClick={() => handleDelete(response.ResponseID)}
-                                        className="bg-red-500 text-white py-1 px-3 rounded hover:bg-red-600 transition duration-200"
-                                    >
-                                        Delete
-                                    </button>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
+                <div>
+                    {uniqueStudents.map(student => (
+                        <div key={student.UserID} className="student-response-summary text-3xl">
+                            <button
+                                onClick={() => handleStudentSelect(student.UserID)}
+                                className="text-green-600 font-bold hover:underline"
+                            >
+                                {student.FirstName} {student.LastName}
+                            </button>
+                            <span className="text-white ml-4">
+                                Total Score: {calculateTotalScore(student.UserID)}
+                            </span>
+
+                            {selectedStudent === student.UserID && (
+                                <table className="w-full p-2 bg-blue-400 mt-2">
+                                    <thead>
+                                        <tr>
+                                            <th className="border-2 p-2">Question</th>
+                                            <th className="border-2 p-2">Chosen Option</th>
+                                            <th className="border-2 p-2">Answer Text</th>
+                                            <th className="border-2 p-2">Is Correct</th>
+                                            <th className="border-2 p-2">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody className="text-black bg-blue-300">
+                                        {responses
+                                            .filter(response => response.UserID === student.UserID)
+                                            .map(response => (
+                                                <tr key={response.ResponseID}>
+                                                    <td className="border-2 text-center">{response.QuestionText}</td>
+                                                    <td className="border-2 text-center">{response.ChosenOption}</td>
+                                                    <td className="border-2 text-center">{response.AnswerText}</td>
+                                                    <td className="border-2 text-center">
+                                                        <span
+                                                            className={`py-1 px-3 rounded-full text-sm ${
+                                                                response.IsCorrect
+                                                                    ? 'bg-green-200 text-green-700'
+                                                                    : 'bg-red-200 text-red-700'
+                                                            }`}
+                                                        >
+                                                            {response.IsCorrect ? 'Yes' : 'No'}
+                                                        </span>
+                                                    </td>
+                                                    <td className="rounded-sm border-2 text-center bg-blue-500 hover:bg-red-600">
+                                                        <button
+                                                            onClick={() => handleDelete(response.ResponseID)}
+                                                            className="bg-red-500 text-white py-1 px-3 rounded hover:bg-red-600 transition duration-200"
+                                                        >
+                                                            Delete
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            ))}
+                                    </tbody>
+                                </table>
+                            )}
+                        </div>
+                    ))}
+                </div>
             )}
         </div>
     );
