@@ -110,7 +110,7 @@
 
 
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';  // Import axios for API requests
+import axios from 'axios';
 import '../styles/Mcq.css';
 import { useFetchQuizData } from '../hooks/FetchQuestion';
 import { useDispatch, useSelector } from 'react-redux';
@@ -119,16 +119,14 @@ import { FaQuestion } from 'react-icons/fa';
 
 export default function Mcq({ onChecked }) {
     const [checked, setChecked] = useState(undefined);
-    const [textAnswer, setTextAnswer] = useState('');  // State to hold short answer
+    const [textAnswer, setTextAnswer] = useState('');
     const [{ isLoading, serverError }] = useFetchQuizData();
     const trace = useSelector((state) => state.questions.trace);
     const result = useSelector((state) => state.result.result);
     const dispatch = useDispatch();
-    const questions = useSelector(
-        (state) => state.questions.queue[state.questions.trace]
-    );
-    const userId = useSelector((state) => state.user.userId); // Get the user ID from the store
-    const quizId = useSelector((state) => state.other.quizId); // Get the quiz ID from the store
+    const questions = useSelector((state) => state.questions.queue[state.questions.trace]);
+    const userId = useSelector((state) => state.user.userId);
+    const quizId = useSelector((state) => state.other.quizId);
 
     useEffect(() => {
         if (checked !== undefined) {
@@ -143,7 +141,7 @@ export default function Mcq({ onChecked }) {
                 QuizID: quizId,
                 QuestionID: questionId,
                 ChosenOption: chosenOption,
-                AnswerText: answerText,  // Use the provided answer text
+                AnswerText: answerText,
                 IsCorrect: isCorrect,
             });
 
@@ -165,12 +163,11 @@ export default function Mcq({ onChecked }) {
     };
 
     const onSubmitTextAnswer = () => {
-        const isCorrect = false; // Short answers may need separate evaluation logic
+        const isCorrect = false; 
 
-        // Submit response for short answer
         if (questions) {
             submitResponse(questions.QuestionID, null, textAnswer, isCorrect);
-            setTextAnswer(''); // Clear the text box after submitting
+            setTextAnswer('');
         }
     };
 
@@ -181,7 +178,7 @@ export default function Mcq({ onChecked }) {
     }
 
     return (
-        <div className="w-50% h-50% bg-blue-300 border-2 border-white rounded-md pt-4  pl-4  ">
+        <div className="w-50% h-50% bg-blue-300 border-2 border-white rounded-md pt-4 pl-4">
             <div className="qs flex gap-2">
                 <FaQuestion size={30} />
                 <h2 className="text-3xl underline flex items-center">
@@ -189,11 +186,10 @@ export default function Mcq({ onChecked }) {
                 </h2> 
             </div>
             <div>
-                {questions?.QuestionType === 'multiple-choice' ? (
+                {(questions?.QuestionType === 'multiple-choice' || questions?.QuestionType === 'true/false') && (
                     <ul key={questions?.QuestionID}>
                         {questions?.Options.map((option) => (
                             <li key={option.OptionID} className="flex ">
-                                {/* Hidden radio input */}
                                 <input
                                     type="radio"
                                     name="options"
@@ -201,25 +197,25 @@ export default function Mcq({ onChecked }) {
                                     onChange={() => onSelect(option.OptionID)}
                                     className="hidden"
                                 />
-
-                                {/* Custom radio button */}
                                 <label
                                     className="text-black font-serif cursor-pointer flex flex-row gap-2 w-full"
                                     htmlFor={`q${option.OptionID}-option`}
                                 >
                                     <span
-                                        className={`w-5 h-5  rounded-full border-2 transition duration-20  ${
+                                        className={`w-5 h-5 rounded-full border-2 transition duration-20 ${
                                             checked === option.OptionID ? 'bg-black border-2 border-black' : 'bg-white border-gray-400'
                                         }`}
                                     ></span>
-                                    <span className='text-black font-serif hover:text-gray-50'>
+                                    <span className="text-black font-serif hover:text-gray-50">
                                         {option.OptionText}
                                     </span>
                                 </label>
                             </li>
                         ))}
                     </ul>
-                ) : (
+                )}
+               
+                {questions?.QuestionType === 'short answer' && (
                     <div>
                         <input
                             type="text"
