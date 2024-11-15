@@ -12,6 +12,7 @@ import AllQuizzes from './Quiz_dashboard.js';
 import "../styles/App.css";
 import { useSelector } from 'react-redux';
 import ResponseManager from './ResponseManager.js';
+import CourseManagement from './CourseManagement.js';
 
 
 import {
@@ -104,6 +105,14 @@ const router = createBrowserRouter([
             <CheckUserTeacher>
                <ResponseManager></ResponseManager>
             </CheckUserTeacher>
+        ),
+    },
+    {
+        path: '/course_management',
+        element: (
+            <CheckUserAdmin>
+               <CourseManagement></CourseManagement>
+            </CheckUserAdmin>
         ),
     },
 ]);
