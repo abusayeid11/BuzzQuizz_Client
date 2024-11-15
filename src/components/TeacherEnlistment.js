@@ -15,7 +15,7 @@ export default function TeacherEnlistment() {
 
     const fetchTeachers = async () => {
         try {
-            const response = await axios.get('http://localhost:8000/api/users/teachers');
+            const response = await axios.get('http://localhost:8000/api/response/teachers');
             setTeachers(response.data);
         } catch (error) {
             console.error('Error fetching teachers:', error);

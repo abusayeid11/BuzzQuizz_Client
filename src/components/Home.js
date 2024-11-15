@@ -74,6 +74,7 @@ export default function Home() {
     function navigateToResponse() {
         navigate('/response')
     }
+    
 
     return (
         <div className="home_body font-serif h-screen  flex flex-col r justify-center items-center"

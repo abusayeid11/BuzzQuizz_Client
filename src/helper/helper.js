@@ -33,6 +33,8 @@ export function attempts_Number(result) {
 // }
 
 export function earn_points(result, answers) {
+
+    console.log(answers)
     return result
         .map((selectedOption, i) => {
             const correctOptions = answers[i]?.CorrectOptions;

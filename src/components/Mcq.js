@@ -164,6 +164,9 @@ export default function Mcq({ onChecked }) {
 
     const onSubmitTextAnswer = () => {
         const isCorrect = false; 
+        onChecked(textAnswer);
+        setChecked(textAnswer);
+
 
         if (questions) {
             submitResponse(questions.QuestionID, null, textAnswer, isCorrect);
