@@ -133,9 +133,13 @@ export default function Home() {
                     Give Your Academic Exams <br />
                     with <span className="text-blue-950  font-extralight underline  hover:text-gray-500">BuzzQuizz!</span>
                 </div>
+
+               
                 <div className="exam_btn">
                       
                 {userRole === 'admin' && (
+
+                   
                                 <button
                                 className="bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-lg text-lg"
                                 onClick={navigateToQuiz}
@@ -143,6 +147,10 @@ export default function Home() {
                                 
                                 Enlist Teacher
                             </button>
+
+                         
+
+                            
                             )}
                              {userRole === 'student' && (
                                 <button
@@ -152,6 +160,7 @@ export default function Home() {
                                 
                                 Take Exam
                             </button>
+                            
                             )}
                              {userRole === 'teacher' && (
                                 <button
@@ -163,6 +172,24 @@ export default function Home() {
                             </button>
                             )}
                    
+                </div>
+
+                <div className='mt-4'>
+                {userRole === 'admin' && (
+
+                   
+<button
+className="bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-lg text-lg"
+onClick={handleCourse}
+>
+ Course
+</button>
+
+
+
+
+)}
+
                 </div>
                
                 <div>

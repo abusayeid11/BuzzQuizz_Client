@@ -2,11 +2,18 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 //import '../styles/TeacherEnlistment.css';
 import { FaClipboardCheck, FaMale, FaTasks} from 'react-icons/fa'
+import { useNavigate } from 'react-router-dom';
+
 export default function TeacherEnlistment() {
+    const navigate = useNavigate();
     const [teachers, setTeachers] = useState([]);
     const [courses, setCourses] = useState([]);
     const [selectedTeacher, setSelectedTeacher] = useState('');
     const [selectedCourse, setSelectedCourse] = useState('');
+
+    function handleCourse() {
+        navigate('/course');
+    }
 
     useEffect(() => {
         fetchTeachers();
@@ -44,6 +51,7 @@ export default function TeacherEnlistment() {
             alert('Teacher assigned to course successfully.');
             setSelectedTeacher('');
             setSelectedCourse('');
+            handleCourse();
         } catch (error) {
             console.error('Error assigning teacher:', error);
         }
