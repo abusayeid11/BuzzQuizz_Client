@@ -100,22 +100,29 @@ const AllQuizzes = () => {
     }
 
     return (
-        <div className="w-full h-screen font-serif"   style = {{backgroundImage:`url(bg.jpg)`}}>
+        <div className="w-full h-screen font-serif"   
+        style={{
+            backgroundImage: `url(quiz3.webp)`,
+            backgroundSize: "cover", // Ensures the image covers the full page
+            backgroundRepeat: "no-repeat", // Prevents the image from repeating
+            backgroundPosition: "center", // Centers the image
+          }}
+        >
             <div className="quiz flex justify-center pt-4 pb-4">
-            <h2 className='flex justify-center  bg-blue-300 w-1/6 border-2 border-white rounded-md pt-2 pb-2 text-2xl'>All Quizzes</h2>
+            <h2 className='flex justify-center  backdrop-blur-lg w-1/6 border-2 border-white rounded-md pt-2 pb-2 text-2xl'>All Quizzes</h2>
             </div>
            
             <div className="
-             grid grid-cols-5 gap-4 w-full
+             grid grid-cols-5 gap-4 w-full 
             ">
                 {quizzes?.map((quiz) => (
-                    <div key={quiz?.QuizID} className="course-card">
+                    <div key={quiz?.QuizID} className="course-card backdrop-blur-lg">
                         <h3>{quiz?.QuizTitle}</h3>
 
                         {user?.userRole !== 'teacher' && (
                         <Link
                             to={`/quiz`}
-                            className="btn bg-blue-700 hover:bg-blue-500 hover:p-2 text-center p-2 rounded text-white font-extralight"
+                            className="btn text-white bg-blue-900 hover:bg-gray-200 hover:text-black  text-center p-2 rounded  font-extralight"
                             onClick={() => handleQuizId(quiz.QuizID)}
                         >
                             Take Exam
@@ -125,7 +132,7 @@ const AllQuizzes = () => {
                         {user?.userRole === 'teacher' && (
                             <Link
                                 to={`/response`}
-                                className="btn bg-blue-700 hover:bg-blue-500 hover:p-2 text-center p-2 rounded text-white font-extralight"
+                                className="btn text-white bg-blue-900 hover:bg-gray-200 hover:text-black  hover:p-2 text-center p-2 rounded  font-extralight"
                                 onClick={() => handleQuizId(quiz.QuizID)}
                             >
                                 View Responses

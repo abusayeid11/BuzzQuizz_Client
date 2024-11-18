@@ -375,7 +375,12 @@ const QuestionCreator = () => {
 
     return (
         <div className="w-full h-screen flex  flex-col justify-center items-center font-serif gap-5"
-        style={{backgroundImage:`url(bg.jpg)`}}
+        style={{
+            backgroundImage: `url(quiz4.webp)`,
+            backgroundSize: "cover", // Ensures the image covers the full page
+            backgroundRepeat: "no-repeat", // Prevents the image from repeating
+            backgroundPosition: "center", // Centers the image
+          }}
         >
             <h1 className='bg-blue-300 border-2 border-white w-1/6 font-serif text-2xl text-black flex justify-center rounded-md pl-2 pr-2'>Create Questions</h1>
             <select value={questionType} onChange={handleQuestionTypeChange} 
@@ -386,8 +391,8 @@ const QuestionCreator = () => {
                 <option value="short answer">Short Answer Question</option>
             </select>
             {renderQuestionForm()}
-            <button onClick={handleSubmit} className=' border-2 border-blue-300 bg-white hover:bg-blue-500 pt-2 pr-2 pl-2 pb-2 rounded-md hover:p-3'>Create Question</button>
-            <button onClick={handleFinish} className=' border-2 border-blue-300 bg-white hover:bg-blue-500 pt-2 pr-2 pl-2 pb-2 rounded-md hover:p-3'>Finish</button>
+            <button onClick={handleSubmit} className=' border-2 text-white bg-blue-900 hover:bg-gray-200 hover:text-black p-2 rounded-md hover:p-3'>Create Question</button>
+            <button onClick={handleFinish} className=' border-2 text-white bg-blue-900 hover:bg-gray-200 hover:text-black p-2 rounded-md hover:p-3'>Finish</button>
             {feedback && <p>{feedback}</p>}
         </div>
     );

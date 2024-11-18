@@ -58,16 +58,21 @@ export default function TeacherEnlistment() {
     };
 
     return (
-        <div className="w-full h-screen flex flex-col   font-serif text-black pt-20"
-        style = {{backgroundImage: `url(bg.jpg)` }}>
-            <div className="title flex justify-center pb-10">
-            <h1 className=' font-serif text-black border-2 border-white bg-blue-300 rounded-md font-semibold pt-4 pb-4 pr-2 pl-4'>Teacher Enlistment</h1>
-            </div>
-          <div className='flex justify-center w-50%'>
-            <div className=" pl-10 pr-10 pb-10 pt-10 flex flex-col justify-center items-center gap-5 bg-white border-2 border-blue-700 rounded-md  ">
-                <h2 className=' font-semibold border-2 border-blue-800 flex flex-row justify-center items-center bg-blue-300 rounded-md pt-4 pb-4 pr-2 pl-2 gap-1'>
+        <div className="w-full h-screen flex flex-col   font-serif text-black  justify-center items-center gap-4" 
+        style={{
+            backgroundImage: `url(quiz4.webp)`,
+            backgroundSize: "cover", // Ensures the image covers the full page
+            backgroundRepeat: "no-repeat", // Prevents the image from repeating
+            backgroundPosition: "center", // Centers the image
+          }}>
+            <div className="" >
+            <h2 className=' font-semibold border-2 border-blue-900 flex flex-row justify-center items-center backdrop-blur-lg rounded-md pt-4 pb-4 pr-2 pl-2 gap-1 backdrop-blur-lg'>
                 <FaClipboardCheck size={20} color='navy'/>
                 Assign Teacher to Course:</h2>
+            </div>
+          <div className='flex justify-center w-50% '>
+            <div className=" pl-10 pr-10 pb-10 pt-10 flex flex-col justify-center items-center gap-5 backdrop-blur-lg border-2 border-blue-700 rounded-md  ">
+              
                 <div className='flex justify-center items-center gap-2'>
                 <FaMale size={20} color='navy'/>
                     <label htmlFor="teacher-select" className=''>Select Teacher:</label>
@@ -107,7 +112,7 @@ export default function TeacherEnlistment() {
                     </select>
                 </div>
 
-                <button onClick={assignTeacherToCourse} className=' text-black bg-blue-300 border-2 border-blue-700 rounded-md pb-2 pr-2 pl-2 pt-2'>Assign Teacher</button>
+                <button onClick={assignTeacherToCourse} className='  bg-blue-900 hover:bg-gray-200 hover:text-black  rounded-md p-2 text-white'>Assign Teacher</button>
             </div> </div>
         </div>
     );

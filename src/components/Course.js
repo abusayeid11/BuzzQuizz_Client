@@ -74,12 +74,19 @@ export default function Course() {
     return (
         <>
         <Slide/>
-        <div className=" w-screen flex flex-col justify-center items-center gap-4 font-serif"  style = {{backgroundImage : `url(bg.jpg)`} }>
+        <div className=" w-screen flex flex-col justify-center items-center gap-2 font-serif"  
+         style={{
+            backgroundImage: `url(quiz4.webp)`,
+            backgroundSize: "cover", // Ensures the image covers the full page
+            backgroundRepeat: "no-repeat", // Prevents the image from repeating
+            backgroundPosition: "center", // Centers the image
+          }}
+        >
             
             <h1></h1>
-            <h1 className='font-serif text-black font-extralight border-2 border-white rounded-md bg-blue-300 pr-10 pl-10 '>Course Management</h1>
-            <div className="h-screen w-screen flex flex-col  items-center gap-4">
-            <div className=" bg-blue-300  rounded-md flex flex-row justify-center items-center w-60% pt-10 pb-10 pr-10 pl-10 gap-5 border-2 border-white">
+            <h1 className='font-serif text-black font-extralight border-2 border-white rounded-md backdrop-blur-lg p-2 '>Course Management</h1>
+            <div className="h-screen w-screen flex flex-col  items-center">
+            <div className="backdrop-blur-lg   rounded-md flex flex-row justify-center items-center w-60% pt-10 pb-10 pr-10 pl-10 gap-5 border-2 border-white">
                 
                 <input
                     type="text"
@@ -105,10 +112,10 @@ export default function Course() {
                         })
                     }
                 />
-                <button onClick={createCourse} className="h-12 w-30 font-serif font-extralight  rounded-md  bg-white hover:bg-blue-200 pr-2 pl-2 "> Create Course</button>
+                <button onClick={createCourse} className="h-12 w-30 font-serif font-extralight  rounded-md text-white bg-blue-900 hover:bg-gray-200 hover:text-black pr-2 pl-2 "> Create Course</button>
             </div>
-            <div className="course_table">
-                <h2 className='font-sans font-semibold'>Courses</h2>
+            <div className=" backdrop-blur-sm course_table">
+                <h2 className='font-sans font-semibold backdrop-blur-lg'>Courses</h2>
                 <table>
                     <thead>
                         <tr>

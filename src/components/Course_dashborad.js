@@ -135,9 +135,14 @@ const AllCourses = () => {
     }
 
     return (
-        <div className="w-full h-screen font-serif" style={{ backgroundImage: `url(bg.jpg)` }}>
+        <div className="w-full h-screen font-serif" style={{
+            backgroundImage: `url(quiz4.webp)`,
+            backgroundSize: "cover", // Ensures the image covers the full page
+            backgroundRepeat: "no-repeat", // Prevents the image from repeating
+            backgroundPosition: "center", // Centers the image
+          }}>
             <div className='flex justify-center pt-3 pb-3'>
-                <h2 className='pt-3 font-semibold pb-3 text-2xl border-2 border-white bg-blue-300 w-1/6 flex justify-center rounded-md'>
+                <h2 className='pt-3 font-semibold pb-3 text-2xl border-2 border-white backdrop-blur-lg w-1/6 flex justify-center rounded-md'>
                     All Courses
                 </h2>
             </div>
@@ -145,32 +150,37 @@ const AllCourses = () => {
             {/* Updated grid layout */}
             <div className="grid grid-cols-5 gap-4 w-full pr-10">
                 {courses?.map((course) => (
-                    <div key={course?.CourseID} className="bg-blue-300 flex flex-col gap-2 justify-center items-center border-2 border-white rounded-md pt-3 pb-3">
+                    <div key={course?.CourseID} className="backdrop-blur-3xl flex flex-col gap-2 justify-center items-center border-2 border-white rounded-md pt-3 pb-3">
                         <h3 className="text-center font-semibold">{course?.CourseName}</h3>
                         
                         {userRole === 'teacher' && (
                             <>
+                              <div className='flex gap-3'>
+                            
                                 <Link
                                     to={'/create_quiz'}
-                                    className="btn bg-blue-700 hover:bg-blue-500 font-extralight text-center p-2 rounded text-white"
+                                    className="btn bg-white hover:bg-green-500 font-extralight text-center p-2 rounded text-black"
                                     onClick={() => handleCourseId(course.CourseID)}
                                 >
                                     Create Exam
                                 </Link>
                                 <Link
                                     to={'/quiz_view'}
-                                    className="btn bg-blue-700 hover:bg-blue-500 hover:p-2 text-center p-2 rounded text-white font-extralight"
+                                    className="btn bg-blue-900 hover:bg-gray-200 hover:text-black hover:p-2 text-center p-2 rounded text-white font-extralight"
                                     onClick={() => handleCourseId(course.CourseID)}
                                 >
                                     View Quiz
                                 </Link>
+
+                              </div>
+                               
                             </>
                         )}
                         
                         {userRole === 'student' && (
                             <Link
                                 to={'/quiz_view'}
-                                className="btn bg-blue-700 hover:bg-blue-500 hover:p-2 text-center p-2 rounded text-white font-extralight"
+                                className="btn bg-blue-900 hover:bg-gray-200 hover:text-black hover:p-2 text-center p-2 rounded text-white font-extralight"
                                 onClick={() => handleCourseId(course.CourseID)}
                             >
                                 Take Exam
@@ -180,7 +190,7 @@ const AllCourses = () => {
                         {userRole === 'admin' && (
                             <Link
                                 to={'/teacher_enlist'}
-                                className="btn bg-blue-700 hover:bg-blue-500 hover:p-2 text-center p-2 rounded text-white font-extralight"
+                                className="btn bg-blue-900 hover:bg-gray-200 hover:text-black hover:p-2 text-center p-2 rounded text-white font-extralight"
                                 onClick={() => handleCourseId(course.CourseID)}
                             >
                                 Enlist Teacher

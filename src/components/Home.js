@@ -78,20 +78,20 @@ export default function Home() {
 
     return (
         <div className="home_body font-serif h-screen  flex flex-col r justify-center items-center"
-        style={{ backgroundImage: `url(/bg.jpg)` }}>
+        style={{ backgroundImage: `url(quiz3.webp)` }}>
             {/* Header */}
            
           
-            <div className="header_body  w-full  max-w-5xl mx-auto px-10 py-5  flex  justify-between bg-gray-200 shadow-md border-2 border-blue-600 rounded-md">
+            <div className="header_body  w-full  max-w-5xl mx-auto px-10 py-5  flex  justify-between backdrop-blur-md shadow-md border-2 border-black rounded-md ">
            
-                <div className="app_title text-2xl font-bold text-blue-600 font-sans">
+                <div className="app_title text-2xl font-bold text-blue-900 font-sans">
                     BuzzQuizz
                 </div>
                 {isLoggedIn ? (
                     <div className="user-menu relative group  justify-center items-center">
                         {/* User Info (trigger) */}
                         <div className="user-info flex items-center cursor-pointer gap-2">
-                        <span className=" text-blue-600 font-bold text-lg capitalize font-serif ">{userName}</span>
+                        <span className=" text-blue-900 font-bold text-lg capitalize font-serif ">{userName}</span>
                             <span className=" text-gray-400 text-lg  font-serif ">({userRole})</span>
                             <ArrowDropDownIcon className="ml-2" />
                         </div>
@@ -118,7 +118,7 @@ export default function Home() {
                 ) : (
                     <div>
                       
-                       <button className=' border-2 border-blue-300 bg-white hover:bg-blue-500 pt-2 pr-2 pl-2 pb-2 rounded-md hover:p-3'
+                       <button className=' border-2 text-white bg-blue-900 hover:bg-gray-200 hover:text-black pt-2 pr-2 pl-2 pb-2 rounded-md hover:p-3'
                             onClick={navigateToLogin}
                         >
                             Log In
@@ -129,7 +129,7 @@ export default function Home() {
 
             {/* Main Body */}
             <div className="body_layout mt-16 text-center">
-                <div className="title_body text-4xl font-bold text-gray-800 mb-8">
+                <div className="title_body text-4xl font-bold backdrop-blur-xl  p-5  text-black mb-8">
                     Give Your Academic Exams <br />
                     with <span className="text-blue-950  font-extralight underline  hover:text-gray-500">BuzzQuizz!</span>
                 </div>
@@ -141,7 +141,7 @@ export default function Home() {
 
                    
                                 <button
-                                className="bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-lg text-lg"
+                                className="bg-blue-900 hover:bg-gray-200 hover:text-black text-white py-3 px-6 rounded-lg text-lg"
                                 onClick={navigateToQuiz}
                             >
                                 
@@ -154,7 +154,7 @@ export default function Home() {
                             )}
                              {userRole === 'student' && (
                                 <button
-                                className="bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-lg text-lg"
+                                className="bg-blue-900 hover:bg-blue-700 text-white py-3 px-6 rounded-lg text-lg"
                                 onClick={navigateToQuiz}
                             >
                                 
@@ -164,7 +164,7 @@ export default function Home() {
                             )}
                              {userRole === 'teacher' && (
                                 <button
-                                className="bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-lg text-lg"
+                                className="bg-blue-900 hover:bg-blue-700 text-white py-3 px-6 rounded-lg text-lg"
                                 onClick={navigateToQuiz}
                             >
                                 
@@ -179,7 +179,7 @@ export default function Home() {
 
                    
 <button
-className="bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-lg text-lg"
+className="bg-blue-900 hover:bg-blue-700 text-white py-3 px-6 rounded-lg text-lg"
 onClick={handleCourse}
 >
  Course

@@ -38,7 +38,14 @@ export default function TrueFalse({ onChecked }) {
     }
 
     return (
-        <div className="truefalse_body">
+        <div className="truefalse_body"
+        style={{
+            backgroundImage: `url(quiz2.webp)`,
+            backgroundSize: "cover", // Ensures the image covers the full page
+            backgroundRepeat: "no-repeat", // Prevents the image from repeating
+            backgroundPosition: "center", // Centers the image
+          }}
+        >
             <h2 className="question_title">{questions?.QuestionText}</h2>
             <ul key={questions?.QuestionID}>
                 <li>

@@ -170,10 +170,15 @@ export default function Login() {
     return (
         <div
             className="login_body font-serif gap-4"
-            style={{ backgroundImage: `url(bg.jpg)` }}
+            style={{
+                backgroundImage: `url(quiz3.webp)`,
+                backgroundSize: "cover", // Ensures the image covers the full page
+                backgroundRepeat: "no-repeat", // Prevents the image from repeating
+                backgroundPosition: "center", // Centers the image
+              }}
         >
             <form
-                className="bg-blue-300 rounded-md flex flex-col justify-center items-center w-40% pt-10 pb-10 pr-10 pl-10 gap-5 border-2 border-white"
+                className="backdrop-blur-lg rounded-md flex flex-col justify-center items-center w-40% pt-10 pb-10 pr-10 pl-10 gap-5 border-2 border-white"
                 onSubmit={handleSubmit}
             >
                 <div className="title">
@@ -236,7 +241,7 @@ export default function Login() {
                 {/* Link to Register Component */}
                 <div className="register-link flex">
                     <p> Not registered?{' '}</p>
-                    <div className="underline text-blue-600 hover:text-gray-400 ml-1">
+                    <div className="underline text-white bg-blue-900 hover:bg-gray-200 hover:text-black ml-1">
                         <Link to="/register">Register here</Link>
                     </div>
                 </div>

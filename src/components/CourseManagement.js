@@ -70,9 +70,9 @@ export default function CourseManagement() {
 
     return (
         <div className="w-screen flex flex-col items-center gap-4 font-serif text-black"
-             style={{ backgroundImage: `url(bg.jpg)` }}>
+             style={{ backgroundImage: `url(quiz4.webp)` }}>
             
-            <h1 className="font-serif text-black font-extralight border-2 border-white rounded-md bg-blue-300 p-4">
+            <h1 className="font-serif text-black font-extralight border-2 border-white rounded-md backdrop-blur-md p-4">
                 Course Management
             </h1>
 
@@ -129,7 +129,7 @@ export default function CourseManagement() {
                             ))}
                         </select>
                     </div>
-                    <button onClick={assignTeacherToCourse} className="text-black bg-blue-300 border-2 border-blue-700 rounded-md p-2">
+                    <button onClick={assignTeacherToCourse} className="bg-blue-900 hover:bg-gray-200 hover:text-black text-white rounded-md p-2">
                         Assign Teacher
                     </button>
                 </div>

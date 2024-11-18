@@ -181,7 +181,14 @@ export default function Mcq({ onChecked }) {
     }
 
     return (
-        <div className="w-50% h-50% bg-blue-300 border-2 border-white rounded-md pt-4 pl-4">
+        <div className="w-50% h-50% bg-blue-300 border-2 border-white rounded-md pt-4 pl-4"
+        style={{
+            backgroundImage: `url(quiz2.webp)`,
+            backgroundSize: "cover", // Ensures the image covers the full page
+            backgroundRepeat: "no-repeat", // Prevents the image from repeating
+            backgroundPosition: "center", // Centers the image
+          }}
+        >
             <div className="qs flex gap-2">
                 <FaQuestion size={30} />
                 <h2 className="text-3xl underline flex items-center">

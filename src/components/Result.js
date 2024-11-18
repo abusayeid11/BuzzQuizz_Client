@@ -30,7 +30,12 @@ export default function Result() {
     }
     return (
         <div className="w-full h-screen font-serif flex flex-col justify-center items-center  gap-4 " 
-        style={{backgroundImage:`url(bg.jpg)`}}>
+        style={{
+            backgroundImage: `url(quiz2.webp)`,
+            backgroundSize: "cover", // Ensures the image covers the full page
+            backgroundRepeat: "no-repeat", // Prevents the image from repeating
+            backgroundPosition: "center", // Centers the image
+          }}>
             <h1 className="bg-blue-400 border-2 border-white pt-2 pb-2 pr-2 pl-2 rounded-md w-1/8 flex justify-center font-serif text-black text-2xl">Quiz Application</h1>
             <div className="bg-blue-300 border-2 pt-4 pr-4 pl-4 pb-4  w-1/3  font-serif flex flex-col gap-2">
                 <div className="flex bg-blue-400 border-2 border-white rounded-md items-center pt-2 pr-2 pl-2 justify-between">

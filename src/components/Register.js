@@ -61,7 +61,12 @@ export default function Register() {
 
     return (
         <div className="register_body gap-4 font-serif "
-        style = {{backgroundImage : `url(bg.jpg)`} }>
+        style={{
+            backgroundImage: `url(quiz3.webp)`,
+            backgroundSize: "cover", // Ensures the image covers the full page
+            backgroundRepeat: "no-repeat", // Prevents the image from repeating
+            backgroundPosition: "center", // Centers the image
+          }}>
            
             <form className="bg-blue-300  rounded-md flex flex-col justify-center items-center w-40% pt-10 pb-10 pr-10 pl-10 gap-5 border-2 border-white" onSubmit={handleSubmit}>
             <div className="title ">
@@ -202,7 +207,7 @@ export default function Register() {
                 </select>
      </div>
                 {!valid && (
-                    <button className="h-12 w-20 font-semibold border rounded-md  bg-white hover:bg-blue-200 " type="submit">
+                    <button className="h-12 w-20 font-semibold border rounded-md text-white bg-blue-900 hover:bg-gray-200 hover:text-black p-2 " type="submit">
                     Register
                 </button>
                 )}

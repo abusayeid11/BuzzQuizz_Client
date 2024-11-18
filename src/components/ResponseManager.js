@@ -50,19 +50,25 @@ const ResponseManager = () => {
     const uniqueStudents = [...new Map(responses.map(item => [item.UserID, item])).values()];
 
     return (
-        <div className="w-full flex flex-col justify-center items-center font-serif gap-2 pt-2 bg-blue-300 h-screen">
-            <h1 className="bg-blue-300 border-2 border-white w-1/6 font-serif text-2xl text-black flex justify-center rounded-md pl-2 pr-2">
+        <div className="w-full flex flex-col justify-center items-center font-serif gap-2 pt-2 bg-blue-300 h-screen "
+          style={{
+            backgroundImage: `url(quiz4.webp)`,
+            backgroundSize: "cover", // Ensures the image covers the full page
+            backgroundRepeat: "no-repeat", // Prevents the image from repeating
+            backgroundPosition: "center", // Centers the image
+          }}>
+            <h1 className="backdrop-blur-sm border-2 border-white w-1/6 font-serif text-2xl text-black flex justify-center rounded-md p-4">
                 User Responses
             </h1>
             {uniqueStudents.length === 0 ? (
                 <p className="text-gray-600">No responses found.</p>
             ) : (
-                <div>
+                <div className="backdrop-blur-sm border-2 border-white w-1/6 font-serif text-2xl text-black flex justify-center rounded-md p-4">
                     {uniqueStudents.map(student => (
                         <div key={student.UserID} className="student-response-summary text-3xl">
                             <button
                                 onClick={() => handleStudentSelect(student.UserID)}
-                                className="text-green-600 font-bold hover:underline"
+                                className="text-black font-2xl underline hover:underline"
                             >
                                 {student.FirstName} {student.LastName}
                             </button>

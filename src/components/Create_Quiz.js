@@ -42,11 +42,16 @@ const CreateQuizForm = () => {
 
     return (
         <div className=" w-full h-screen flex  flex-col justify-center items-center font-serif gap-5"
-        style = {{backgroundImage:`url(bg.jpg)`}}
+        style={{
+            backgroundImage: `url(quiz2.webp)`,
+            backgroundSize: "cover", // Ensures the image covers the full page
+            backgroundRepeat: "no-repeat", // Prevents the image from repeating
+            backgroundPosition: "center", // Centers the image
+          }}
         >
-            <h1 className='bg-blue-300 border-2 border-white w-1/6 font-serif text-2xl text-black flex justify-center rounded-md pl-2 pr-2'>Create Quiz</h1>
-            <form onSubmit={handleSubmit} className='bg-blue-300 pt-5 pr-5 pl-5 pb-5 border-2 border-white flex-col gap-2 w-1/4 rounded-md'>
-                <div className="flex gap-6 items-center">
+            <h1 className='backdrop-blur-lg border-2 border-white w-1/6 font-serif text-4xl text-black flex justify-center rounded-md p-3'>Create Quiz</h1>
+            <form onSubmit={handleSubmit} className='backdrop-blur-lg pt-5 pr-5 pl-5 pb-5 border-2 border-white flex-col gap-2 w-1/2 rounded-md flex justify-center items-center text-xl'>
+                <div className="flex gap-6 items-center text-xl">
                     <div className="">Quiz Title:</div>
                     <input
                         className='border-2 rounded-lg  pt-2 pb-2 pr-6 pl-2 shadow-sm shadow-black'
@@ -98,7 +103,7 @@ const CreateQuizForm = () => {
                 </div>
 
                 <div className='flex justify-center'>
-                <button className=' border-2 border-blue-300 bg-white hover:bg-blue-500 pt-2 pr-2 pl-2 pb-2 rounded-md hover:p-3' type="submit">Create Quiz</button>
+                <button className=' border-2 border-blue-300 bg-white hover:bg-blue-500 pt-2 pr-2 pl-2 pb-2 rounded-md hover:p-3' type="submit">Create</button>
                 </div>
                
             </form>
