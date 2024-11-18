@@ -38,7 +38,7 @@ export default function TeacherEnlistment() {
         }
 
         try {
-            await axios.put(`http://localhost:8000/api/course/${selectedCourse}/assign`, {
+            await axios.put(`http://localhost:8000/api/course/${selectedCourse}`, {
                 TeacherID: selectedTeacher,
             });
             alert('Teacher assigned to course successfully.');
